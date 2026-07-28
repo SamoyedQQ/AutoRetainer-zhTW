@@ -30,7 +30,7 @@ internal static unsafe class VoyageMain
             var txt = message.GetText();
             if(txt == Lang.VoyageInventoryError)
             {
-                DuoLog.Warning($"[Voyage] Your inventory is full!");
+                DuoLog.Warning($"[Voyage] 背包已滿！");
                 VoyageScheduler.Enabled = false;
                 P.TaskManager.Abort();
                 P.TaskManager.Enqueue(VoyageScheduler.SelectQuitVesselSelectorMenu);
@@ -48,7 +48,7 @@ internal static unsafe class VoyageMain
             if(txt.ContainsAny(StringComparison.OrdinalIgnoreCase, Lang.UnableToRepairVessel))
             {
                 TaskRepairAll.Abort = true;
-                DuoLog.Warning($"[Voyage] You are out of repair components!");
+                DuoLog.Warning($"[Voyage] 維修零件用完了！");
                 if(C.FailureNoRepair == WorkshopFailAction.ExcludeVessel)
                 {
                     Data.GetEnabledVesselsData(TaskRepairAll.Type).Remove(TaskRepairAll.Name);
@@ -275,7 +275,7 @@ internal static unsafe class VoyageMain
                                         }
                                         else
                                         {
-                                            DuoLog.Error($"Invalid plan selected (Points.Count={plan.Points.Count})");
+                                            DuoLog.Error($"選到的方案無效（Points.Count={plan.Points.Count}）");
                                         }
                                     }
                                     else if(adata.VesselBehavior == VesselBehavior.Redeploy)

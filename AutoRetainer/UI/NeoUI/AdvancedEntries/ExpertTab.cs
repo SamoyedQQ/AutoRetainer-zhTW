@@ -60,7 +60,7 @@ public class ExpertTab : NeoUIEntry
                 {
                     i += d.RetainerData.RemoveAll(x => x.Name == "");
                 }
-                DuoLog.Information($"Cleaned {i} entries");
+                DuoLog.Information($"已清除 {i} 筆資料");
             }
         })
 

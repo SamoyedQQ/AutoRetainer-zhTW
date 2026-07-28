@@ -258,7 +258,7 @@ internal static unsafe class SchedulerMain
                         {
                             if(EzThrottler.Throttle("CloseRetainerList", 1000))
                             {
-                                DuoLog.Warning($"Your inventory is full");
+                                DuoLog.Warning($"背包已滿");
                                 if(MultiMode.Active)
                                 {
                                     DebugLog($"Scheduling retainer list closing (multi mode)");

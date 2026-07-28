@@ -239,7 +239,7 @@ internal static unsafe class WorkshopUI
                             }
                             else
                             {
-                                DuoLog.Error($"No plan selected!");
+                                DuoLog.Error($"沒有選擇方案！");
                             }
                         }
                         foreach(var x in Data.OfflineSubmarineData)

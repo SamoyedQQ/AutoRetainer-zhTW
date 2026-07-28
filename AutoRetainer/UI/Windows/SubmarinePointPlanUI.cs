@@ -125,7 +125,7 @@ internal unsafe class SubmarinePointPlanUI : Window
                     }
                     catch(Exception ex)
                     {
-                        DuoLog.Error($"Could not import plan: {ex.Message}");
+                        DuoLog.Error($"無法匯入方案：{ex.Message}");
                         ex.Log();
                     }
                 }

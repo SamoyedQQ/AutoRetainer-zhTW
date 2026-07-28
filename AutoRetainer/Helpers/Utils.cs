@@ -414,7 +414,7 @@ public static unsafe class Utils
             {
                 if(imPlan.IMProtectList.Contains(slot->ItemId))
                 {
-                    DuoLog.Warning($"Requested discard of slot {type}[{slotIndex}], item {ExcelItemHelper.GetName(expectedItem)}, is protected, can not discard");
+                    DuoLog.Warning($"要求丟棄 {type}[{slotIndex}] 的 {ExcelItemHelper.GetName(expectedItem)}，但它受保護，無法丟棄");
                 }
                 else
                 {
@@ -430,7 +430,7 @@ public static unsafe class Utils
             }
             else
             {
-                DuoLog.Warning($"Requested discard of slot {type}[{slotIndex}], expected item {ExcelItemHelper.GetName(expectedItem)}, contained {slotIndex}, can not discard");
+                DuoLog.Warning($"要求丟棄 {type}[{slotIndex}]，預期是 {ExcelItemHelper.GetName(expectedItem)}，實際卻是 {slotIndex}，無法丟棄");
             }
         }
     }

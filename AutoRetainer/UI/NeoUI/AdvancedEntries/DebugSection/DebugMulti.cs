@@ -23,7 +23,7 @@ internal unsafe class DebugMulti : DebugSectionBase
         if(ImGui.CollapsingHeader("NeoHET"))
         {
             if(ImGui.Button("把進屋傳送加入佇列")) TaskNeoHET.Enqueue(null);
-            if(ImGui.Button("把工坊加入佇列")) TaskNeoHET.TryEnterWorkshop(() => DuoLog.Error("Fail"));
+            if(ImGui.Button("把工坊加入佇列")) TaskNeoHET.TryEnterWorkshop(() => DuoLog.Error("失敗"));
             ImGuiEx.Text($"""
                 Can enter workshop: {S.LifestreamIPC.CanMoveToWorkshop()}
                 """);

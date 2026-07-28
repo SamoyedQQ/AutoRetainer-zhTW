@@ -241,7 +241,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
         if(arguments.EqualsIgnoreCase("debug"))
         {
             config.Verbose = !config.Verbose;
-            DuoLog.Information($"Debug mode {(config.Verbose ? "enabled" : "disabled")}");
+            DuoLog.Information($"除錯模式{(config.Verbose ? "enabled" : "disabled")}");
             S.NeoWindow.Reload();
         }
         else if(arguments.EqualsIgnoreCaseAny("e", "enable"))
@@ -280,7 +280,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
         else if(arguments.EqualsIgnoreCaseAny("n", "night"))
         {
             C.NightMode = !C.NightMode;
-            DuoLog.Information($"Night mode {(C.NightMode ? "enabled" : "disabled")}");
+            DuoLog.Information($"夜間模式{(C.NightMode ? "enabled" : "disabled")}");
             if(C.NightMode)
             {
                 if(!MultiMode.Enabled)
@@ -310,7 +310,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
             {
                 C.NightMode = true;
             }
-            DuoLog.Information($"Night mode {(C.NightMode ? "enabled" : "disabled")}");
+            DuoLog.Information($"夜間模式{(C.NightMode ? "enabled" : "disabled")}");
         }
         else if(arguments.EqualsIgnoreCaseAny("s", "settings"))
         {
@@ -338,17 +338,17 @@ public unsafe class AutoRetainer : IDalamudPlugin
         }
         else if(arguments.EqualsIgnoreCase("het"))
         {
-            TaskNeoHET.Enqueue(() => DuoLog.Error("Failed to find suitable house"));
+            TaskNeoHET.Enqueue(() => DuoLog.Error("找不到適合的房屋"));
         }
         else if(arguments.EqualsIgnoreCase("wet"))
         {
             if(TaskNeoHET.GetWorkshopEntrance() != null)
             {
-                TaskNeoHET.TryEnterWorkshop(() => DuoLog.Error("Failed to enter workshop"));
+                TaskNeoHET.TryEnterWorkshop(() => DuoLog.Error("無法進入公會工坊"));
             }
             else
             {
-                TaskNeoHET.Enqueue(() => DuoLog.Error("Failed to find suitable house"), true);
+                TaskNeoHET.Enqueue(() => DuoLog.Error("找不到適合的房屋"), true);
             }
         }
         else if(arguments.EqualsIgnoreCaseAny("itemsell"))
@@ -375,7 +375,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
             }
             else
             {
-                DuoLog.Error($"No valid housing NPC or retainer bell were found, or AutoRetainer is busy, or sale function is disabled");
+                DuoLog.Error($"找不到可用的房屋 NPC 或傳喚鈴，也可能是 AutoRetainer 正忙或販售功能被停用");
             }
         }
         else if(arguments.StartsWith("shutdown"))
@@ -397,7 +397,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
                     if(str.Length > 3) time = time.Add(TimeSpan.FromSeconds(int.Parse(str[3])));
                     if(time.TotalSeconds < 10)
                     {
-                        DuoLog.Error("Timer can't be less than 10 seconds");
+                        DuoLog.Error("時間不能少於 10 秒");
                     }
                     else
                     {
@@ -464,56 +464,56 @@ public unsafe class AutoRetainer : IDalamudPlugin
             {
                 var field = arguments.Split(" ")[1];
                 var value = arguments.Split(" ")[2];
-                DuoLog.Information($"Attempting to set {field}={value}");
+                DuoLog.Information($"嘗試設定 {field}={value}");
                 if(C.GetFoP(field).GetType() == typeof(bool))
                 {
                     C.SetFoP(field, bool.Parse(value));
-                    DuoLog.Information($"Set bool {field}={value}");
+                    DuoLog.Information($"已設定 bool {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(int))
                 {
                     C.SetFoP(field, int.Parse(value));
-                    DuoLog.Information($"Set int {field}={value}");
+                    DuoLog.Information($"已設定 int {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(uint))
                 {
                     C.SetFoP(field, uint.Parse(value));
-                    DuoLog.Information($"Set uint {field}={value}");
+                    DuoLog.Information($"已設定 uint {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(float))
                 {
                     C.SetFoP(field, float.Parse(value));
-                    DuoLog.Information($"Set float {field}={value}");
+                    DuoLog.Information($"已設定 float {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(double))
                 {
                     C.SetFoP(field, double.Parse(value));
-                    DuoLog.Information($"Set double {field}={value}");
+                    DuoLog.Information($"已設定 double {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(nint))
                 {
                     C.SetFoP(field, nint.Parse(value));
-                    DuoLog.Information($"Set nint {field}={value}");
+                    DuoLog.Information($"已設定 nint {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(long))
                 {
                     C.SetFoP(field, long.Parse(value));
-                    DuoLog.Information($"Set long {field}={value}");
+                    DuoLog.Information($"已設定 long {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(ulong))
                 {
                     C.SetFoP(field, ulong.Parse(value));
-                    DuoLog.Information($"Set ulong {field}={value}");
+                    DuoLog.Information($"已設定 ulong {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType() == typeof(string))
                 {
                     C.SetFoP(field, value);
-                    DuoLog.Information($"Set string {field}={value}");
+                    DuoLog.Information($"已設定 string {field}={value}");
                 }
                 else if(C.GetFoP(field).GetType().IsEnum)
                 {
                     C.SetFoP(field, int.Parse(value));
-                    DuoLog.Information($"Set enum {field}={value}");
+                    DuoLog.Information($"已設定 enum {field}={value}");
                 }
             }
             catch(Exception e)

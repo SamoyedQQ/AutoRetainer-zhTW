@@ -52,7 +52,7 @@ internal static unsafe class MultiMode
                 {
                     if(TaskChangeCharacter.Expected.Value.Name != Player.Name || TaskChangeCharacter.Expected.Value.World != Player.HomeWorld)
                     {
-                        DuoLog.Warning($"[ARERRCMM] Character mismatch, expected {TaskChangeCharacter.Expected}, but logged in on {Player.NameWithWorld}. Please report this to developer unless you have manually interfered with login process");
+                        DuoLog.Warning($"[ARERRCMM] 角色不符，預期是 {TaskChangeCharacter.Expected}，實際登入的是 {Player.NameWithWorld}。除非你有手動介入登入流程，否則請回報給開發者");
                     }
                 }
                 TaskChangeCharacter.Expected = null;
@@ -61,7 +61,7 @@ internal static unsafe class MultiMode
             WriteOfflineData(true, true);
             if(LastLogin == Svc.ClientState.LocalContentId && Active)
             {
-                DuoLog.Error("Multi mode disabled as it have detected duplicate login.");
+                DuoLog.Error("偵測到重複登入，已停用多角色模式。");
                 Enabled = false;
             }
             LastLogin = MultiMode.Enabled && !C.MultiWaitOnLoginScreen ? Svc.ClientState.LocalContentId : 0;
@@ -123,7 +123,7 @@ internal static unsafe class MultiMode
                 if(val != 0)
                 {
                     Svc.GameConfig.Set(SystemConfigOption.AutoAfkSwitchingTime, 0u);
-                    DuoLog.Warning($"Your Auto Afk Switching Time option was incompatible with current AutoRetainer configuration and was set to (Never). This is not an error.");
+                    DuoLog.Warning($"你的「自動 AFK 切換時間」設定和目前的 AutoRetainer 設定不相容，已改成「永不」。這不是錯誤。");
                 }
             }
         }
@@ -133,7 +133,7 @@ internal static unsafe class MultiMode
                 if(val != 0)
                 {
                     Svc.GameConfig.Set(SystemConfigOption.IdlingCameraAFK, 0u);
-                    DuoLog.Warning($"Your Idling Camera AFK option was incompatible with current AutoRetainer configuration and was set to (Disabled). This is not an error.");
+                    DuoLog.Warning($"你的「待機鏡頭 AFK」設定和目前的 AutoRetainer 設定不相容，已改成「停用」。這不是錯誤。");
                 }
             }
         }
@@ -181,7 +181,7 @@ internal static unsafe class MultiMode
                 {
                     data.Enabled = false;
                     data.WorkshopEnabled = false;
-                    DuoLog.Warning("Too many errors, current character is excluded.");
+                    DuoLog.Warning("錯誤太多，已排除目前角色。");
                     Interactions.Clear();
                     return;
                 }
@@ -189,7 +189,7 @@ internal static unsafe class MultiMode
                 {
                     Enabled = false;
                     data.WorkshopEnabled = false;
-                    DuoLog.Error("Fatal error. Please report this with logs.");
+                    DuoLog.Error("嚴重錯誤，請附上 log 回報。");
                     Interactions.Clear();
                     return;
                 }
@@ -298,7 +298,7 @@ internal static unsafe class MultiMode
             TaskNeoHET.TryEnterWorkshop(() =>
             {
                 Data.Enabled = false;
-                DuoLog.Error($"Due to absence of retainer bell and failure to find workshop, character is excluded from processing retainers");
+                DuoLog.Error($"附近沒有傳喚鈴、也找不到公會工坊，這個角色不處理僱員");
                 P.TaskManager.Abort();
             });
         }
@@ -662,7 +662,7 @@ internal static unsafe class MultiMode
                     }
                     else
                     {
-                        DuoLog.Error($"Error during auto login: {error}");
+                        DuoLog.Error($"自動登入時發生錯誤：{error}");
                     }
                 }
                 return false;

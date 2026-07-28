@@ -34,12 +34,12 @@ public static unsafe class TaskChangeCharacter
             PluginLog.Information($"Enqueue login: world={currentWorld}, charaName: {charaName}, charaWorld={charaWorld}, acc={account}, dc={dc}");
             if(dc == 0)
             {
-                DuoLog.Warning($"Invalid data for {charaName}@{charaWorld}. Attempting to auto-fix...");
+                DuoLog.Warning($"{charaName}@{charaWorld} 的資料有問題，嘗試自動修正……");
                 currentWorld = charaWorld;
                 dc = (int)ExcelWorldHelper.Get(currentWorld).Value.DataCenter.RowId;
                 if(dc == 0)
                 {
-                    DuoLog.Error("Failed to fix world data. Log in manually.");
+                    DuoLog.Error("無法修正伺服器資料，請手動登入。");
                     return;
                 }
             }

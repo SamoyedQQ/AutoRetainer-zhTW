@@ -26,7 +26,7 @@ internal static unsafe class BailoutManager
                     {
                         if(Utils.GenericThrottle)
                         {
-                            DuoLog.Warning($"[Bailout] Closing stuck SelectString window");
+                            DuoLog.Warning($"[Bailout] 關閉卡住的 SelectString 視窗");
                             Callback.Fire(addon, true, -1);
                             NoSelectString = Environment.TickCount64;
                         }
@@ -49,7 +49,7 @@ internal static unsafe class BailoutManager
                         {
                             if(Utils.GenericThrottle)
                             {
-                                DuoLog.Warning($"[Bailout] Backing out of CharaSelect");
+                                DuoLog.Warning($"[Bailout] 從選角畫面退出");
                                 addon->GetComponentButtonById(4)->ClickAddonButton(addon);
                                 CharaSelectStuck = Environment.TickCount64;
                                 EzThrottler.Throttle("MultiModeAfkOnTitleLogin", 60000, true);

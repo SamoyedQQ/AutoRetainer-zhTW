@@ -30,28 +30,28 @@ public static unsafe class InventorySpaceManager
             var inv = InventoryManager.Instance()->GetInventoryContainer(Task.InventoryType);
             if(inv == null)
             {
-                DuoLog.Warning($"Inventory {Task.InventoryType} is null");
+                DuoLog.Warning($"背包 {Task.InventoryType} 是空的");
                 return true;
             }
             if(Data.GetIMSettings().IMProtectList.Contains(Task.ItemID))
             {
-                DuoLog.Warning($"Item {Task} is protected and won't be sold.");
+                DuoLog.Warning($"道具 {Task} 受保護，不會賣掉。");
                 return true;
             }
             var slot = inv->Items[Task.Slot];
             if(Task.ItemID != slot.ItemId || slot.ItemId == 0 || slot.Quantity != Task.Quantity)
             {
-                DuoLog.Warning($"Slot contains different item {ExcelItemHelper.GetName(slot.ItemId)}x{slot.Quantity}, should be {Task}");
+                DuoLog.Warning($"格子裡是別的道具 {ExcelItemHelper.GetName(slot.ItemId)}x{slot.Quantity}，應該要是 {Task}");
                 return true;
             }
             if(!IsRetainerInventoryLoaded())
             {
-                DuoLog.Warning($"Could not find retainer inventory");
+                DuoLog.Warning($"找不到僱員的背包");
                 return true;
             }
             if(!IsAgentRetainerActive)
             {
-                DuoLog.Warning($"AgentRetainer is not active");
+                DuoLog.Warning($"AgentRetainer 沒有啟動");
                 return true;
             }
             if(!Data.GetIMSettings().IMDry)

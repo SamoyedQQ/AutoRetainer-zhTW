@@ -105,7 +105,7 @@ internal static unsafe class TaskCalculateAndPickBestExpRoute
             }
             catch(Exception e)
             {
-                DuoLog.Error($"Critical error occurred during path optimization: {e.Message}");
+                DuoLog.Error($"路線最佳化時發生嚴重錯誤：{e.Message}");
                 e.Log();
             }
             VoyageMain.WaitOverlay.IsProcessing = false;

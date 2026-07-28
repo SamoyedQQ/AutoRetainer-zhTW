@@ -49,7 +49,7 @@ public unsafe class InventoryManagementCommon
         ImGuiEx.TreeNodeCollapsingHeader("Mass addition/removal", () =>
         {
             ImGui.SetNextItemWidth(200f);
-            if(ImGui.BeginCombo("選擇分類", SelectedCategories.Count != 0 ? $"{SelectedCategories.Count} selected" : "None selected", ImGuiComboFlags.HeightLarge))
+            if(ImGui.BeginCombo("選擇分類", SelectedCategories.Count != 0 ? $"已選取 {SelectedCategories.Count} 項" : "未選取", ImGuiComboFlags.HeightLarge))
             {
                 if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Plus, "全部"))
                 {
@@ -89,7 +89,7 @@ public unsafe class InventoryManagementCommon
                 ImGui.SetNextItemWidth(200f);
                 Modified |= ImGui.InputText($"依名稱篩選", ref ItemSearch, 100);
                 ImGui.SetNextItemWidth(200f);
-                if(ImGui.BeginCombo("選擇稀有度", Rarities.Any() ? $"{Rarities.Print()}" : "Any rarity", ImGuiComboFlags.HeightLarge))
+                if(ImGui.BeginCombo("選擇稀有度", Rarities.Any() ? $"{Rarities.Print()}" : "任何稀有度", ImGuiComboFlags.HeightLarge))
                 {
                     foreach(var r in Enum.GetValues<ItemRarity>())
                     {

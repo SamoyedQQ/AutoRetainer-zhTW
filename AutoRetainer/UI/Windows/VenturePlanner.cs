@@ -28,7 +28,7 @@ public sealed class VenturePlanner : Window
     public override void Draw()
     {
         ImGuiEx.SetNextItemFullWidth();
-        if(ImGui.BeginCombo("##selectRet", $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" ?? "Select a retainer...", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##selectRet", $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" ?? "選擇僱員……", ImGuiComboFlags.HeightLarge))
         {
             foreach(var x in C.OfflineData.OrderBy(x => !C.NoCurrentCharaOnTop && x.CID == Player.CID ? 0 : 1))
             {
@@ -208,7 +208,7 @@ public sealed class VenturePlanner : Window
                             C.SavedPlans.Add(adata.VenturePlan.JSONClone());
                             Notify.Success($"Plan {adata.VenturePlan.Name} saved!");
                         }
-                        ImGuiEx.Tooltip(overwrite ? "Overwrite Existing Venture Plan" : $"Save Venture Plan");
+                        ImGuiEx.Tooltip(overwrite ? "覆寫現有的探險方案" : $"儲存探險方案");
                     });
                 }
 

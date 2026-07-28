@@ -28,7 +28,7 @@ public sealed unsafe class CleanupCharacterConfiguration : InventoryManagementBa
                 ImGui.TableNextColumn();
                 var plan = characterData.InventoryCleanupPlan == Guid.Empty ? null : C.AdditionalIMSettings.FirstOrDefault(p => p.GUID == characterData.InventoryCleanupPlan);
                 ImGui.SetNextItemWidth(200f);
-                if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "Default Plan", ImGuiComboFlags.HeightLarge))
+                if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "預設方案", ImGuiComboFlags.HeightLarge))
                 {
                     if(ImGui.Selectable("預設方案", plan == null)) characterData.InventoryCleanupPlan = Guid.Empty;
                     ImGui.Separator();

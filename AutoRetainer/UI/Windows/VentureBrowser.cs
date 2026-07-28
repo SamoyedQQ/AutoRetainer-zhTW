@@ -47,7 +47,7 @@ internal class VentureBrowser : Window
     public override void Draw()
     {
         ImGuiEx.SetNextItemFullWidth();
-        if(ImGui.BeginCombo("##selectRet", SelectedCharacter != null ? $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" : "Select a retainer...", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##selectRet", SelectedCharacter != null ? $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" : "選擇僱員……", ImGuiComboFlags.HeightLarge))
         {
             foreach(var x in C.OfflineData.OrderBy(x => !C.NoCurrentCharaOnTop && x.CID == Player.CID ? 0 : 1))
             {
@@ -183,7 +183,7 @@ internal class VentureBrowser : Window
 
                         if(x.IsDol)
                         {
-                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes" : "No");
+                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "是" : "否");
                             if(!x.Gathered && GatherBuddyPresent)
                             {
                                 if(ImGui.SmallButton($"採集##{x.ID}"))

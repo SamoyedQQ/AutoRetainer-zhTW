@@ -451,7 +451,7 @@ internal static unsafe class WorkshopUI
             }
             else
             {
-                ImGuiEx.Text(vessel.GetRemainingSeconds() > 0 ? $"{VoyageUtils.Seconds2Time(vessel.GetRemainingSeconds())}" : "Voyage completed");
+                ImGuiEx.Text(vessel.GetRemainingSeconds() > 0 ? $"{VoyageUtils.Seconds2Time(vessel.GetRemainingSeconds())}" : "航行完成");
             }
 
         }
@@ -474,7 +474,7 @@ internal static unsafe class WorkshopUI
                 var currentPlan = VoyageUtils.GetSubmarineUnlockPlanByGuid(adata.SelectedUnlockPlan) ?? VoyageUtils.GetDefaultSubmarineUnlockPlan(false);
                 var isDefault = VoyageUtils.GetSubmarineUnlockPlanByGuid(adata.SelectedUnlockPlan) == null;
                 var text = Environment.TickCount64 % 2000 > 1000 ? "Unlocking every point" : "No or unknown plan selected";
-                if(ImGui.BeginCombo("##uplan", (currentPlan?.Name ?? text) + (isDefault ? " (default)" : ""), ImGuiComboFlags.HeightLarge))
+                if(ImGui.BeginCombo("##uplan", (currentPlan?.Name ?? text) + (isDefault ? "（預設）" : ""), ImGuiComboFlags.HeightLarge))
                 {
                     if(ImGui.Button("開啟編輯器"))
                     {
@@ -523,7 +523,7 @@ internal static unsafe class WorkshopUI
             }
             ImGui.Separator();
             ImGuiEx.SetNextItemWidthScaled(150f);
-            ImGuiEx.SliderInt("索引覆寫", ref adata.IndexOverride, 0, 4, adata.IndexOverride == 0 ? "Disabled" : $"{adata.IndexOverride}");
+            ImGuiEx.SliderInt("索引覆寫", ref adata.IndexOverride, 0, 4, adata.IndexOverride == 0 ? "停用" : $"{adata.IndexOverride}");
             ImGuiComponents.HelpMarker($"若 AutoRetainer 裡的載具順序和航行面板不一致，就要用這個功能替順序錯誤的載具指定正確索引。請確認索引與管制面板中的順序相符。");
             if(ImGui.CollapsingHeader("我最近有替這艘載具改名"))
             {

@@ -14,7 +14,7 @@ public static unsafe class RetainerConfig
         if(!C.EnableEntrustManager) ImGuiEx.HelpMarker("已在設定中全域停用", EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString());
         ImGui.SameLine();
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo($"##select", selectedPlan?.Name ?? "Disabled", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo($"##select", selectedPlan?.Name ?? "停用", ImGuiComboFlags.HeightLarge))
         {
             if(ImGui.Selectable("停用")) adata.EntrustPlan = Guid.Empty;
             for(var i = 0; i < C.EntrustPlans.Count; i++)

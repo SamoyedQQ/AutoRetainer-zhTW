@@ -37,7 +37,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
         var selectedPlan = C.AdditionalGCExchangePlans.FirstOrDefault(x => x.GUID == SelectedPlanGuid);
         ImGuiEx.InputWithRightButtonsArea(() =>
         {
-            if(ImGui.BeginCombo("##selplan", selectedPlan?.DisplayName ?? "Default Plan"))
+            if(ImGui.BeginCombo("##selplan", selectedPlan?.DisplayName ?? "預設方案"))
             {
                 if(ImGui.Selectable("預設方案", selectedPlan == null)) SelectedPlanGuid = Guid.Empty;
                 ImGui.Separator();
@@ -334,7 +334,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                         if(trans) ImGui.PushStyleVar(ImGuiStyleVar.Alpha, 0.2f);
                         ImGui.Image(ctex.Handle, new(ImGui.GetFrameHeight()));
                         if(trans) ImGui.PopStyleVar();
-                        ImGuiEx.Tooltip($"{c}" + (trans ? " (unavailable)" : ""));
+                        ImGuiEx.Tooltip($"{c}" + (trans ? "（無法使用）" : ""));
                         ImGui.SameLine(0, 1);
                     }
                 }

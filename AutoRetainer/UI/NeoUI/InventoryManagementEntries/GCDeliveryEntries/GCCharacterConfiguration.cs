@@ -28,7 +28,7 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
                 ImGui.TableNextColumn();
                 var plan = characterData.ExchangePlan == Guid.Empty ? null : C.AdditionalGCExchangePlans.FirstOrDefault(p => p.GUID == characterData.ExchangePlan);
                 ImGui.SetNextItemWidth(200f);
-                if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "Default Plan", ImGuiComboFlags.HeightLarge))
+                if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "預設方案", ImGuiComboFlags.HeightLarge))
                 {
                     if(ImGui.Selectable("預設方案", plan == null)) characterData.ExchangePlan = Guid.Empty;
                     ImGui.Separator();

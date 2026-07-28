@@ -218,7 +218,7 @@ public class DeployablesTab : NeoUIEntry
         ImGui.Separator();
 
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##uplan2", "地點方案： " + (VoyageUtils.GetPointPlanName(SelectedPointPlan) ?? "not selected"), ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##uplan2", "地點方案： " + (VoyageUtils.GetPointPlanName(SelectedPointPlan) ?? "未選取"), ImGuiComboFlags.HeightLarge))
         {
             foreach(var plan in C.SubmarinePointPlans)
             {
@@ -377,7 +377,7 @@ public class DeployablesTab : NeoUIEntry
                     if(ImGui.BeginCombo($"##unlockplan{entry.GUID}", C.SubmarineUnlockPlans.Any(x => x.GUID == entry.SelectedUnlockPlan)
                                                                               ? C.SubmarineUnlockPlans.First(x => x.GUID == entry.SelectedUnlockPlan)
                                                                                  .Name
-                                                                              : "Non selected", ImGuiComboFlags.HeightLarge))
+                                                                              : "未選取", ImGuiComboFlags.HeightLarge))
                     {
                         foreach(var plan in C.SubmarineUnlockPlans)
                         {
@@ -400,7 +400,7 @@ public class DeployablesTab : NeoUIEntry
                     ImGui.SetNextItemWidth(150f);
                     if(ImGui.BeginCombo($"##pointplan{entry.GUID}", C.SubmarinePointPlans.Any(x => x.GUID == entry.SelectedPointPlan)
                                                                              ? C.SubmarinePointPlans.First(x => x.GUID == entry.SelectedPointPlan).GetPointPlanName()
-                                                                             : "Non selected", ImGuiComboFlags.HeightLarge))
+                                                                             : "未選取", ImGuiComboFlags.HeightLarge))
                     {
                         foreach(var plan in C.SubmarinePointPlans)
                         {
@@ -430,7 +430,7 @@ public class DeployablesTab : NeoUIEntry
                         if(ImGui.BeginCombo($"##firstSubUnlockplan{entry.GUID}", C.SubmarineUnlockPlans.Any(x => x.GUID == entry.FirstSubSelectedUnlockPlan)
                                                      ? C.SubmarineUnlockPlans.First(x => x.GUID == entry.FirstSubSelectedUnlockPlan)
                                                         .Name
-                                                     : "Non selected", ImGuiComboFlags.HeightLarge))
+                                                     : "未選取", ImGuiComboFlags.HeightLarge))
                         {
                             foreach(var plan in C.SubmarineUnlockPlans)
                             {
@@ -453,7 +453,7 @@ public class DeployablesTab : NeoUIEntry
                         ImGui.SetNextItemWidth(150f);
                         if(ImGui.BeginCombo($"##firstSubPointplan{entry.GUID}", C.SubmarinePointPlans.Any(x => x.GUID == entry.FirstSubSelectedPointPlan)
                                                      ? C.SubmarinePointPlans.First(x => x.GUID == entry.FirstSubSelectedPointPlan).GetPointPlanName()
-                                                     : "Non selected", ImGuiComboFlags.HeightLarge))
+                                                     : "未選取", ImGuiComboFlags.HeightLarge))
                         {
                             foreach(var plan in C.SubmarinePointPlans)
                             {

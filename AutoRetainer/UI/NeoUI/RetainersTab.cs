@@ -92,7 +92,7 @@ public class RetainersTab : NeoUIEntry
         ImGuiEx.Text("動作：");
         ImGui.Separator();
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##ventureplans", SelectedVenturePlan?.Name ?? "None selected", (ImGuiComboFlags)8))
+        if(ImGui.BeginCombo("##ventureplans", SelectedVenturePlan?.Name ?? "未選取", (ImGuiComboFlags)8))
         {
             foreach(var plan in C.SavedPlans)
             {
@@ -125,7 +125,7 @@ public class RetainersTab : NeoUIEntry
         ImGui.Separator();
 
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##entrustplans", SelectedEntrustPlan?.Name ?? "None selected", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##entrustplans", SelectedEntrustPlan?.Name ?? "未選取", ImGuiComboFlags.HeightLarge))
         {
             foreach(var plan in C.EntrustPlans)
             {

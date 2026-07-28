@@ -35,7 +35,7 @@ public sealed class FcDataManager
                 if(!x.Value.GilCountsTowardsChara && C.DisplayOnlyWalletFC) continue;
                 ImGui.TableNextRow();
                 ImGui.TableNextColumn();
-                ImGuiEx.TextV(C.NoNames ? $"Free company {++i}" : x.Value.Name);
+                ImGuiEx.TextV(C.NoNames ? $"公會 {++i}" : x.Value.Name);
 
                 ImGui.TableNextColumn();
                 foreach(var c in C.OfflineData.Where(z => z.FCID == x.Key))

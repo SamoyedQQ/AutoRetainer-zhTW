@@ -21,7 +21,7 @@ public class EntrustManager : InventoryManagementBase
 
         ImGuiEx.InputWithRightButtonsArea(() =>
         {
-            if(ImGui.BeginCombo($"##select", selectedPlan?.Name ?? "Select plan...", ImGuiComboFlags.HeightLarge))
+            if(ImGui.BeginCombo($"##select", selectedPlan?.Name ?? "選擇方案……", ImGuiComboFlags.HeightLarge))
             {
                 for(var i = 0; i < C.EntrustPlans.Count; i++)
                 {

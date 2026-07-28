@@ -11,13 +11,13 @@ public sealed class GilDisplayManager
     public void Draw()
     {
         ImGuiEx.SetNextItemWidthScaled(200f);
-        ImGui.InputInt("Ignore characters/retainers with gil less than", ref C.MinGilDisplay.ValidateRange(0, int.MaxValue));
-        ImGuiComponents.HelpMarker($"Ignored retainer gil still contributes to character/DC total. Character is ignored if their gil AND all retainers' gil is less than this value. Ignored characters do not contribute to DC total.");
+        ImGui.InputInt("忽略金幣少於此數量的角色／僱員", ref C.MinGilDisplay.ValidateRange(0, int.MaxValue));
+        ImGuiComponents.HelpMarker($"被忽略的僱員金幣仍會計入角色／大區總額。只有當角色本身與其所有僱員的金幣都低於此數值時，該角色才會被忽略。被忽略的角色不計入大區總額。");
         ref var filter = ref Ref<string>.Get();
-        ImGui.Checkbox("Only display character total", ref C.GilOnlyChars);
+        ImGui.Checkbox("只顯示角色總額", ref C.GilOnlyChars);
         ImGui.SameLine();
         ImGuiEx.SetNextItemFullWidth();
-        ImGui.InputTextWithHint("##fltr", "Filter...", ref filter, 50);
+        ImGui.InputTextWithHint("##fltr", "篩選……", ref filter, 50);
         Dictionary<ExcelWorldHelper.Region, List<OfflineCharacterData>> data = [];
         foreach(var x in C.OfflineData)
         {
@@ -64,11 +64,11 @@ public sealed class GilDisplayManager
                         }
                         if(fcdata != null && fcdata.Gil > 0)
                         {
-                            ImGuiEx.Text(ImGuiColors.DalamudYellow, $"        Free Company {fcdata.Name}: {fcdata.Gil:N0}");
+                            ImGuiEx.Text(ImGuiColors.DalamudYellow, $"        公會 {fcdata.Name}：{fcdata.Gil:N0}");
                         }
                     }
-                    ImGuiEx.Text(ImGuiColors.DalamudViolet, $"    {Censor.Character(c.Name, c.World)}{(fcdata != null && fcdata.Gil > 0 ? "+FC" : "")} total: {charTotal:N0}");
-                    if(ImGuiEx.HoveredAndClicked("Click to relog"))
+                    ImGuiEx.Text(ImGuiColors.DalamudViolet, $"    {Censor.Character(c.Name, c.World)}{(fcdata != null && fcdata.Gil > 0 ? "+FC" : "")} 合計：{charTotal:N0}");
+                    if(ImGuiEx.HoveredAndClicked("點擊可切換登入"))
                     {
                         if(!MultiMode.Relog(c, out var error, Internal.RelogReason.Command))
                         {
@@ -79,11 +79,11 @@ public sealed class GilDisplayManager
                     ImGui.Separator();
                 }
             }
-            ImGuiEx.Text(ImGuiColors.DalamudOrange, $"Data center total ({x.Key}): {dcTotal:N0}");
+            ImGuiEx.Text(ImGuiColors.DalamudOrange, $"大區總額（{x.Key}）：{dcTotal:N0}");
             globalTotal += dcTotal;
             ImGui.Separator();
             ImGui.Separator();
         }
-        ImGuiEx.Text(ImGuiColors.DalamudOrange, $"Overall total: {globalTotal:N0}");
+        ImGuiEx.Text(ImGuiColors.DalamudOrange, $"總計：{globalTotal:N0}");
     }
 }

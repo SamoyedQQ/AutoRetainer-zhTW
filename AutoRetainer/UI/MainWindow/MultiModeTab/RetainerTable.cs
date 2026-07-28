@@ -11,9 +11,9 @@ public static unsafe class RetainerTable
     {
         if(ImGui.BeginTable("##retainertable", 4, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders))
         {
-            ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch);
-            ImGui.TableSetupColumn("Job");
-            ImGui.TableSetupColumn("Venture");
+            ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
+            ImGui.TableSetupColumn("職業");
+            ImGui.TableSetupColumn("探險");
             ImGui.TableSetupColumn("");
             ImGui.TableHeadersRow();
             var retainers = P.GetSelectedRetainers(data.CID);
@@ -46,7 +46,7 @@ public static unsafe class RetainerTable
                         if(!C.EnableEntrustManager) c = ImGuiColors.DalamudRed;
                         ImGuiEx.Text(c, Lang.IconDuplicate);
                         ImGui.PopFont();
-                        ImGuiEx.Tooltip($"Entrust plan \"{plan.Name}\" is active." + (plan.ManualPlan ? "\nThis is manual processing plan" : "") + (Utils.GetReachableRetainerBell(false) != null ? "\nClick to Entrust." : ""));
+                        ImGuiEx.Tooltip($"寄放方案「{plan.Name}」啟用中。" + (plan.ManualPlan ? "\nThis is manual processing plan" : "") + (Utils.GetReachableRetainerBell(false) != null ? "\nClick to Entrust." : ""));
                         if(ImGui.IsItemClicked())
                         {
                             if(!Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.OccupiedSummoningBell])

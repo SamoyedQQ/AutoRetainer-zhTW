@@ -44,7 +44,7 @@ internal unsafe class RetainerListOverlay : Window
         {
             ImGui.BeginDisabled();
         }
-        if(ImGui.Checkbox("Enable AutoRetainer", ref e))
+        if(ImGui.Checkbox("啟用 AutoRetainer", ref e))
         {
             P.WasEnabled = false;
             if(e)
@@ -59,17 +59,17 @@ internal unsafe class RetainerListOverlay : Window
         if(disabled)
         {
             ImGui.EndDisabled();
-            ImGuiComponents.HelpMarker($"MultiMode controls this option. Hold CTRL to override.");
+            ImGuiComponents.HelpMarker($"此選項由多角模式控制。按住 CTRL 可強制變更。");
         }
         if(P.WasEnabled)
         {
             ImGui.SameLine();
-            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"Paused");
+            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"已暫停");
         }
         if(C.MultiModeUIBar)
         {
             ImGui.SameLine();
-            if(ImGui.Checkbox("MultiMode", ref MultiMode.Enabled))
+            if(ImGui.Checkbox("多角模式", ref MultiMode.Enabled))
             {
                 MultiMode.OnMultiModeEnabled();
                 if(MultiMode.Active)
@@ -87,7 +87,7 @@ internal unsafe class RetainerListOverlay : Window
         {
             Svc.Commands.ProcessCommand("/ays");
         }
-        ImGuiEx.Tooltip("Open Plugin Settings");
+        ImGuiEx.Tooltip("開啟外掛設定");
         if(!P.TaskManager.IsBusy)
         {
             ImGui.SameLine();
@@ -118,7 +118,7 @@ internal unsafe class RetainerListOverlay : Window
                     }
                 }
             }
-            ImGuiEx.Tooltip("Quick Entrust");
+            ImGuiEx.Tooltip("快速寄放");
 
             ImGui.SameLine();
             if(ImGuiEx.IconButton($"{Lang.IconGil}##WithdrawGil"))
@@ -139,7 +139,7 @@ internal unsafe class RetainerListOverlay : Window
                     }
                 }
             }
-            ImGuiEx.Tooltip("Quick Withdraw Gil");
+            ImGuiEx.Tooltip("快速提領金幣");
 
             {
                 ImGui.SameLine();
@@ -151,10 +151,10 @@ internal unsafe class RetainerListOverlay : Window
                 {
                     ImGui.OpenPopup("QuickVendorPopup");
                 }
-                ImGuiEx.Tooltip("Quick Vendor Items");
+                ImGuiEx.Tooltip("快速賣出道具");
                 if(ImGui.BeginPopup("QuickVendorPopup"))
                 {
-                    if(ImGui.Selectable("Sell items from Quick Venture List"))
+                    if(ImGui.Selectable("出售快速探險清單中的道具"))
                     {
                         for(var i = 0; i < GameRetainerManager.Count; i++)
                         {

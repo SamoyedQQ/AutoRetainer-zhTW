@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GeneralSettings : InventoryManagementBase
 {
-    public override string Name { get; } = "Grand Company Delivery/General Settings";
+    public override string Name { get; } = "大國防聯軍繳交/一般設定";
 
     public override void Draw()
     {
-        ImGui.Checkbox("Enable Expert Delivery continuation", ref C.AutoGCContinuation);
+        ImGui.Checkbox("啟用精選交易接續處理", ref C.AutoGCContinuation);
         ImGui.Indent();
         ImGuiEx.TextWrapped($"""
             When Expert Delivery Continuation is enabled:

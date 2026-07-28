@@ -15,7 +15,7 @@ public unsafe class DebugInventoryManagement : DebugSectionBase
 
     public override void Draw()
     {
-        if(ImGui.CollapsingHeader("Inventories"))
+        if(ImGui.CollapsingHeader("背包"))
         {
             foreach(var x in Enum.GetValues<InventoryType>())
             {
@@ -25,26 +25,26 @@ public unsafe class DebugInventoryManagement : DebugSectionBase
                     for(var i = 0; i < inv->Size; i++)
                     {
                         var slot = inv->GetInventorySlot(i);
-                        ImGuiEx.Text($"{i}: {ExcelItemHelper.GetName(slot->ItemId)} x{slot->Quantity} {slot->Flags}");
+                        ImGuiEx.Text($"{i}：{ExcelItemHelper.GetName(slot->ItemId)} ×{slot->Quantity} {slot->Flags}");
                     }
                 });
             }
         }
-        if(ImGui.CollapsingHeader("Shop Sell test"))
+        if(ImGui.CollapsingHeader("商店販售測試"))
         {
             ImGuiEx.EnumCombo($"type", ref Type);
-            ImGui.InputInt("Slot", ref slot);
+            ImGui.InputInt("欄位", ref slot);
             ImGuiEx.Text(ExcelItemHelper.GetName(InventoryManager.Instance()->GetInventoryContainer(Type)->GetInventorySlot(slot)->ItemId));
-            if(ImGui.Button("Sell"))
+            if(ImGui.Button("出售"))
             {
                 P.Memory.SellItemToShop(Type, slot);
             }
-            if(ImGui.Button("Enqueue if present"))
+            if(ImGui.Button("若存在則加入佇列"))
             {
                 NpcSaleManager.EnqueueIfItemsPresent();
             }
-            ImGuiEx.Text($"Valid npc: {NpcSaleManager.GetValidNPC()}");
-            if(ImGui.Button("Interact with target")) TargetSystem.Instance()->InteractWithObject(Svc.Targets.Target.Struct(), false);
+            ImGuiEx.Text($"可用的 NPC：{NpcSaleManager.GetValidNPC()}");
+            if(ImGui.Button("與目標互動")) TargetSystem.Instance()->InteractWithObject(Svc.Targets.Target.Struct(), false);
             if(TryGetAddonMaster<AddonMaster.SelectIconString>(out var m))
             {
                 foreach(var x in m.Entries)
@@ -56,7 +56,7 @@ public unsafe class DebugInventoryManagement : DebugSectionBase
                 }
             }
         }
-        if(ImGui.CollapsingHeader("Vendor list"))
+        if(ImGui.CollapsingHeader("商店出售清單"))
         {
             foreach(var x in Vendors)
             {
@@ -70,7 +70,7 @@ public unsafe class DebugInventoryManagement : DebugSectionBase
                     if(ImGuiEx.Shift) Whitelist.Remove(x);
                 }
             }
-            if(ImGui.Button("Copy")) Copy(Whitelist.Print());
+            if(ImGui.Button("複製")) Copy(Whitelist.Print());
         }
     }
 

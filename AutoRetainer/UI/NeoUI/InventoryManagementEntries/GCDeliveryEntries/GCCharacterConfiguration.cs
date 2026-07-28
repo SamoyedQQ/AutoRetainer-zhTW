@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
 {
-    public override string Name { get; } = "Grand Company Delivery/Character Configuration";
+    public override string Name { get; } = "大國防聯軍繳交/角色設定";
 
     public override int DisplayPriority => -10;
 
     public override void Draw()
     {
-        ImGuiEx.TextWrapped($"Here you can assign preconfigured exchange lists to your registered characters, as well as select delivery mode.");
+        ImGuiEx.TextWrapped($"在這裡可以把預先設定好的交換清單指派給已登記的角色，並選擇繳交模式。");
         ImGuiEx.SetNextItemFullWidth();
         ImGuiEx.FilteringInputTextWithHint("##search", "Search...", out var filter);
         if(ImGuiEx.BeginDefaultTable(["~Character", "Plan", "Delivery mode"]))
@@ -30,7 +30,7 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
                 ImGui.SetNextItemWidth(200f);
                 if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "Default Plan", ImGuiComboFlags.HeightLarge))
                 {
-                    if(ImGui.Selectable("Default Plan", plan == null)) characterData.ExchangePlan = Guid.Empty;
+                    if(ImGui.Selectable("預設方案", plan == null)) characterData.ExchangePlan = Guid.Empty;
                     ImGui.Separator();
                     foreach(var exchangePlan in C.AdditionalGCExchangePlans)
                     {

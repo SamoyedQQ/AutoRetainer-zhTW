@@ -12,7 +12,7 @@ internal static class UIUtils
     {
         ref var dragDrop = ref Ref<ImGuiEx.RealtimeDragDrop<T>>.Get($"dsel{id}", () => new($"dsel{id}", x => x.ToString()));
         ImGuiEx.PushID(id);
-        if(ImGui.BeginCombo("##addNew", "Add Entries...", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##addNew", "新增項目……", ImGuiComboFlags.HeightLarge))
         {
             foreach(var x in Enum.GetValues<T>())
             {
@@ -70,7 +70,7 @@ internal static class UIUtils
         if(!C.NoCharaSearch)
         {
             ImGuiEx.SetNextItemFullWidth();
-            ImGui.InputTextWithHint("##search", "Search characters...", ref Ref<string>.Get("SearchChara"), 50);
+            ImGui.InputTextWithHint("##search", "搜尋角色……", ref Ref<string>.Get("SearchChara"), 50);
         }
     }
 
@@ -81,7 +81,7 @@ internal static class UIUtils
             ImGui.PushFont(UiBuilder.IconFont);
             ImGuiEx.Text("\uf0ac");
             ImGui.PopFont();
-            if(ImGuiEx.HoveredAndClicked("Visiting another data center. Right click to clear this status.", ImGuiMouseButton.Right))
+            if(ImGuiEx.HoveredAndClicked("正在造訪其他大區。右鍵可清除此狀態。", ImGuiMouseButton.Right))
             {
                 data.WorldOverride = null;
             }
@@ -192,7 +192,7 @@ internal static class UIUtils
             P.quickSellItems.Toggle();
         }
         ImGui.SameLine();
-        ImGuiEx.Text("+ right click");
+        ImGuiEx.Text("＋右鍵點擊");
     }
 
     private static string KeyInputActive = null;
@@ -208,7 +208,7 @@ internal static class UIUtils
         {
             if(text == KeyInputActive)
             {
-                ImGuiEx.Text(ImGuiColors.DalamudYellow, $"Now press new key...");
+                ImGuiEx.Text(ImGuiColors.DalamudYellow, $"請按下新的按鍵……");
                 foreach(var x in Enum.GetValues<LimitedKeys>())
                 {
                     if(IsKeyPressed(x))
@@ -222,11 +222,11 @@ internal static class UIUtils
             }
             else
             {
-                if(ImGui.Selectable("Auto-detect new key", false, ImGuiSelectableFlags.DontClosePopups))
+                if(ImGui.Selectable("自動偵測新按鍵", false, ImGuiSelectableFlags.DontClosePopups))
                 {
                     KeyInputActive = text;
                 }
-                ImGuiEx.Text($"Select key manually:");
+                ImGuiEx.Text($"手動選擇按鍵：");
                 ImGuiEx.SetNextItemFullWidth();
                 ImGuiEx.EnumCombo("##selkeyman", ref key);
             }

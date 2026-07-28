@@ -9,7 +9,7 @@ public static unsafe class TroubleshootingUI
     private static readonly Config EmptyConfig = new();
     public static void Draw()
     {
-        ImGuiEx.TextWrapped("This tab checks your configuration for common issues that you can resolve yourself before contacting support.");
+        ImGuiEx.TextWrapped("這一頁會檢查你的設定是否有常見問題，讓你在求助前先自行排除。");
 
         if(!Svc.ClientState.ClientLanguage.EqualsAny(ClientLanguage.Japanese, ClientLanguage.German, ClientLanguage.French, ClientLanguage.English))
         {
@@ -261,25 +261,25 @@ public static unsafe class TroubleshootingUI
         }
 
         ImGui.Separator();
-        ImGuiEx.TextWrapped("Expert settings alter behavior that was intended by developer. Please check that your issue is not related to incorrectly configured expert settings.");
-        CheckExpertSetting("Action on accessing retainer bell if no ventures available", nameof(C.OpenBellBehaviorNoVentures));
-        CheckExpertSetting("Action on accessing retainer bell if any ventures available", nameof(C.OpenBellBehaviorWithVentures));
-        CheckExpertSetting("Task completion behavior after accessing bell", nameof(C.TaskCompletedBehaviorAccess));
-        CheckExpertSetting("Task completion behavior after manual enabling", nameof(C.TaskCompletedBehaviorManual));
-        CheckExpertSetting("Stay in retainer menu if there are retainers to finish ventures within 5 minutes or less", nameof(C.Stay5));
-        CheckExpertSetting("Auto-disable plugin when closing retainer list", nameof(C.AutoDisable));
-        CheckExpertSetting("Do not show plugin status icons", nameof(C.HideOverlayIcons));
-        CheckExpertSetting("Display multi mode type selector", nameof(C.DisplayMMType));
-        CheckExpertSetting("Display deployables checkbox in workshop", nameof(C.ShowDeployables));
-        CheckExpertSetting("Enable bailout module", nameof(C.EnableBailout));
-        CheckExpertSetting("Timeout before AutoRetainer will attempt to unstuck, seconds", nameof(C.BailoutTimeout));
-        CheckExpertSetting("Disable sorting and collapsing/expanding", nameof(C.NoCurrentCharaOnTop));
-        CheckExpertSetting("Show MultiMode checkbox on plugin UI bar", nameof(C.MultiModeUIBar));
-        CheckExpertSetting("Retainer menu delay, seconds", nameof(C.RetainerMenuDelay));
-        CheckExpertSetting("Do not error check venture planner", nameof(C.NoErrorCheckPlanner2));
-        CheckExpertSetting("Upon activating Multi Mode, attempt to enter nearby house", nameof(C.MultiHETOnEnable));
-        CheckExpertSetting("Artisan integration", nameof(C.ArtisanIntegration));
-        CheckExpertSetting("Use server time instead of PC time", nameof(C.UseServerTime));
+        ImGuiEx.TextWrapped("專家設定會改變開發者原本設計的行為。回報問題前請先確認不是專家設定沒設好造成的。");
+        CheckExpertSetting("使用傳喚鈴且沒有探險可領取時的動作", nameof(C.OpenBellBehaviorNoVentures));
+        CheckExpertSetting("使用傳喚鈴且有探險可領取時的動作", nameof(C.OpenBellBehaviorWithVentures));
+        CheckExpertSetting("使用傳喚鈴後的工作完成行為", nameof(C.TaskCompletedBehaviorAccess));
+        CheckExpertSetting("手動啟用後的工作完成行為", nameof(C.TaskCompletedBehaviorManual));
+        CheckExpertSetting("若有僱員將在 5 分鐘內完成探險，就留在僱員選單", nameof(C.Stay5));
+        CheckExpertSetting("關閉僱員列表時自動停用外掛", nameof(C.AutoDisable));
+        CheckExpertSetting("不顯示外掛狀態圖示", nameof(C.HideOverlayIcons));
+        CheckExpertSetting("顯示多角模式類型選擇器", nameof(C.DisplayMMType));
+        CheckExpertSetting("在工坊顯示載具核取方塊", nameof(C.ShowDeployables));
+        CheckExpertSetting("啟用救援模組", nameof(C.EnableBailout));
+        CheckExpertSetting("AutoRetainer 嘗試脫困前的逾時時間（秒）", nameof(C.BailoutTimeout));
+        CheckExpertSetting("停用排序與展開／收合", nameof(C.NoCurrentCharaOnTop));
+        CheckExpertSetting("在外掛介面列顯示多角模式核取方塊", nameof(C.MultiModeUIBar));
+        CheckExpertSetting("僱員選單延遲（秒）", nameof(C.RetainerMenuDelay));
+        CheckExpertSetting("不對探險規劃器做錯誤檢查", nameof(C.NoErrorCheckPlanner2));
+        CheckExpertSetting("啟用多角模式時，嘗試進入附近的房屋", nameof(C.MultiHETOnEnable));
+        CheckExpertSetting("Artisan 整合", nameof(C.ArtisanIntegration));
+        CheckExpertSetting("使用伺服器時間而非電腦時間", nameof(C.UseServerTime));
     }
 
     private static void Error(string message, string tooltip = null)

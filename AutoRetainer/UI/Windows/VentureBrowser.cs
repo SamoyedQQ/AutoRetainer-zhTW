@@ -69,15 +69,15 @@ internal class VentureBrowser : Window
             var adata = Utils.GetAdditionalData(SelectedCharacter.CID, SelectedRetainer.Name);
             if(VentureUtils.IsDoL(SelectedRetainer.Job))
             {
-                ImGuiEx.TextCentered($"{Lang.CharLevel}{SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)} | Gathering: {adata.Gathering} ({adata.Gathering / (float)MaxGathering:P0}) | Perception: {adata.Perception} ({adata.Perception / (float)MaxPerception:P0})");
+                ImGuiEx.TextCentered($"{Lang.CharLevel}{SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)} | 採集力：{adata.Gathering}（{adata.Gathering / (float)MaxGathering:P0}） | 鑑別力：{adata.Perception}（{adata.Perception / (float)MaxPerception:P0}）");
             }
             else
             {
-                ImGuiEx.TextCentered($"{Lang.CharLevel}{SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)} | Item Level: {adata.Ilvl} ({adata.Ilvl / (float)MaxPerception:P0})");
+                ImGuiEx.TextCentered($"{Lang.CharLevel}{SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)} | 裝備等級：{adata.Ilvl}（{adata.Ilvl / (float)MaxPerception:P0}）");
             }
             ImGuiEx.InputWithRightButtonsArea("VBrowser", delegate
             {
-                ImGui.InputTextWithHint("##search", "Filter...", ref search, 100);
+                ImGui.InputTextWithHint("##search", "篩選……", ref search, 100);
             }, delegate
             {
                 ImGuiEx.TextV($"{Lang.CharLevel}:");
@@ -92,7 +92,7 @@ internal class VentureBrowser : Window
             });
             if(adata.Gathering == -1 || adata.Perception == -1 || adata.Ilvl == -1 || SelectedRetainer.Level == 0)
             {
-                ImGuiEx.TextWrapped($"Data is absent for this retainer. Access retainer bell and select that retainer to populate data.");
+                ImGuiEx.TextWrapped($"此僱員沒有資料。請使用傳喚鈴並選取該僱員以建立資料。");
             }
             else
             {
@@ -125,14 +125,14 @@ internal class VentureBrowser : Window
                 {
                     ImGui.TableSetupScrollFreeze(0, 1);
                     ImGui.TableSetupColumn(Lang.CharLevel);
-                    ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch);
+                    ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
                     ImGui.TableSetupColumn(Data.FirstOrDefault()?.IsDol == true ? Lang.CharPlant : Lang.CharItemLevel);
                     ImGui.TableSetupColumn("☆☆☆☆");
                     ImGui.TableSetupColumn("★☆☆☆");
                     ImGui.TableSetupColumn("★★☆☆");
                     ImGui.TableSetupColumn("★★★☆");
                     ImGui.TableSetupColumn("★★★★");
-                    ImGui.TableSetupColumn("Unlocked");
+                    ImGui.TableSetupColumn("已解鎖");
                     ImGui.TableHeadersRow();
 
                     foreach(var x in Data.Where(x => x.VentureName.Contains(search, StringComparison.OrdinalIgnoreCase) && x.VentureLevel >= minLevel && x.VentureLevel <= maxLevel))
@@ -143,12 +143,12 @@ internal class VentureBrowser : Window
                         ImGuiEx.TextCentered(SelectedRetainer.Level >= x.VentureLevel ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"{x.VentureLevel}");
                         ImGui.TableNextColumn();
                         ImGuiEx.Text($"{x.VentureName}");
-                        if(ImGui.SmallButton($"To planner##{x.ID}"))
+                        if(ImGui.SmallButton($"前往規劃器##{x.ID}"))
                         {
                             adata.VenturePlan.List.Add(new(x.ID));
                         }
                         ImGui.SameLine();
-                        if(ImGui.SmallButton($"Check price##{x.ID}"))
+                        if(ImGui.SmallButton($"查詢價格##{x.ID}"))
                         {
                             Svc.Commands.ProcessCommand($"/pmb {x.ItemID}");
                         }
@@ -186,7 +186,7 @@ internal class VentureBrowser : Window
                             ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes" : "No");
                             if(!x.Gathered && GatherBuddyPresent)
                             {
-                                if(ImGui.SmallButton($"Gather##{x.ID}"))
+                                if(ImGui.SmallButton($"採集##{x.ID}"))
                                 {
                                     Svc.Commands.ProcessCommand($"/gather {x.VentureName}");
                                 }
@@ -194,7 +194,7 @@ internal class VentureBrowser : Window
                         }
                         else
                         {
-                            ImGuiEx.Text($"Always");
+                            ImGuiEx.Text($"總是");
                         }
                     }
 

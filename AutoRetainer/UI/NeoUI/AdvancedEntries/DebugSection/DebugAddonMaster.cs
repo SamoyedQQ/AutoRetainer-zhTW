@@ -28,10 +28,10 @@ public unsafe class DebugAddonMaster : DebugSectionBase
         {
             if(TryGetAddonMaster<AddonMaster._TitleMenu>(out var m) && m.IsAddonReady)
             {
-                ImGuiEx.Text($"Ready: {m.IsReady}");
-                if(ImGui.Button("Start")) m.Start();
+                ImGuiEx.Text($"已就緒：{m.IsReady}");
+                if(ImGui.Button("開始")) m.Start();
                 if(ImGui.Button("DataCenter")) m.DataCenter();
-                if(ImGui.Button("Exit")) m.Exit();
+                if(ImGui.Button("離開")) m.Exit();
             }
         }
 
@@ -67,7 +67,7 @@ public unsafe class DebugAddonMaster : DebugSectionBase
         {
             if(TryGetAddonMaster<AddonMaster._CharaSelectListMenu>(out var m) && m.IsAddonReady)
             {
-                if(ImGui.Button("World##w"))
+                if(ImGui.Button("伺服器##w"))
                 {
                     m.SelectWorld();
                 }
@@ -92,7 +92,7 @@ public unsafe class DebugAddonMaster : DebugSectionBase
                     }
                     if(x.IsSelected)
                     {
-                        ImGuiEx.Text($"Selected");
+                        ImGuiEx.Text($"已選取");
                     }
                 }
             }

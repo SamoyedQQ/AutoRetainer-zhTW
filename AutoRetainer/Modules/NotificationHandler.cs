@@ -18,7 +18,7 @@ internal static class NotificationHandler
             {
                 if(C.NotifyDisplayInChatX) Svc.Chat.Print(new()
                 {
-                    Message = new SeStringBuilder().AddUiForeground("[AutoRetainer] Some of the retainers have completed their ventures!", (ushort)UIColor.Green).Build()
+                    Message = new SeStringBuilder().AddUiForeground("[AutoRetainer] 有僱員完成探險了！", (ushort)UIColor.Green).Build()
                 });
                 IsHidden = false;
                 IsNotified = true;

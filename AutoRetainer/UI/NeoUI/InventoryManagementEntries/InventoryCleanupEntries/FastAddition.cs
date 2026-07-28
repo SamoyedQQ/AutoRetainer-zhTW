@@ -6,7 +6,7 @@ using ECommons.WindowsFormsReflector;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public unsafe class FastAddition : InventoryManagementBase
 {
-    public override string Name { get; } = "Inventory Cleanup/Fast Addition and Removal";
+    public override string Name { get; } = "背包整理/快速增刪";
 
     private FastAddition()
     {
@@ -15,17 +15,17 @@ public unsafe class FastAddition : InventoryManagementBase
         .Widget(() =>
         {
             var selectedSettings = InventoryCleanupCommon.SelectedPlan;
-            ImGuiEx.TextWrapped(GradientColor.Get(EColor.RedBright, EColor.YellowBright), $"While this text is visible, hover over items while holding:");
-            ImGuiEx.Text(!ImGui.GetIO().KeyShift ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Shift - add to Quick Venture Sell List");
-            ImGuiEx.Text($"* Items that already in Unconditional Sell List or Discard List WILL NOT BE ADDED to Quick Venture Sell List");
-            ImGuiEx.Text(!ImGui.GetIO().KeyCtrl ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Ctrl - add to Unconditional Sell List");
-            ImGuiEx.Text($"* Items that already in other lists WILL BE MOVED to Unconditional Sell List");
-            ImGuiEx.Text(!IsKeyPressed(Keys.Tab) ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Tab - add to Discard List");
-            ImGuiEx.Text($"* Items that already in other lists WILL BE MOVED to Discard List");
+            ImGuiEx.TextWrapped(GradientColor.Get(EColor.RedBright, EColor.YellowBright), $"這段文字顯示期間，把滑鼠移到道具上並按住：");
+            ImGuiEx.Text(!ImGui.GetIO().KeyShift ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Shift－加入快速探險出售清單");
+            ImGuiEx.Text($"＊已經在「無條件出售清單」或「捨棄清單」裡的道具，不會被加進「快速探險出售清單」");
+            ImGuiEx.Text(!ImGui.GetIO().KeyCtrl ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Ctrl－加入無條件出售清單");
+            ImGuiEx.Text($"＊已經在其他清單裡的道具，會被移動到「無條件出售清單」");
+            ImGuiEx.Text(!IsKeyPressed(Keys.Tab) ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Tab－加入捨棄清單");
+            ImGuiEx.Text($"＊已經在其他清單裡的道具，會被移動到「捨棄清單」");
             //ImGuiEx.Text(IsKeyPressed(Keys.Space) ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Space - add to Desynthesis List");
             //ImGuiEx.Text($"* Items that already in other lists WILL BE MOVED to Desynthesis List");
-            ImGuiEx.Text(!ImGui.GetIO().KeyAlt ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Alt - delete from any list");
-            ImGuiEx.Text("\nItems that are protected are unaffected by these actions");
+            ImGuiEx.Text(!ImGui.GetIO().KeyAlt ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Alt－從任一清單刪除");
+            ImGuiEx.Text("\n受保護的道具不受這些動作影響");
             if(Svc.GameGui.HoveredItem > 0)
             {
                 var id = (uint)(Svc.GameGui.HoveredItem % 1000000);

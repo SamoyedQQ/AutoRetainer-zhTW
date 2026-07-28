@@ -12,14 +12,14 @@ internal unsafe class DebugScheduler : DebugSectionBase
     private string dbgRetName = string.Empty;
     public override void Draw()
     {
-        ImGuiEx.Text($"Gil: {TaskDepositGil.Gil}");
+        ImGuiEx.Text($"金幣：{TaskDepositGil.Gil}");
         ImGui.Checkbox($"TaskWithdrawGil.forceCheck", ref TaskWithdrawGil.forceCheck);
         ImGuiEx.Text($"{Svc.Data.GetExcelSheet<LogMessage>().GetRow(4578).Text.ToDalamudString().GetText(true)}");
-        if(ImGui.Button("Close retainer"))
+        if(ImGui.Button("關閉僱員視窗"))
         {
             DuoLog.Information($"{RetainerHandlers.CloseAgentRetainer()}");
         }
-        ImGuiEx.Text($"Utils.AnyRetainersAvailableCurrentChara(): {Utils.AnyRetainersAvailableCurrentChara()}");
+        ImGuiEx.Text($"目前角色有僱員可用：{Utils.AnyRetainersAvailableCurrentChara()}");
         if(ImGui.Button($"SelectAssignVenture"))
         {
             DuoLog.Information($"{RetainerHandlers.SelectAssignVenture()}");
@@ -76,27 +76,27 @@ internal unsafe class DebugScheduler : DebugSectionBase
         {
             DuoLog.Information($"{RetainerHandlers.CloseAgentRetainer()}");
         }
-        if(ImGui.Button($"SetWithdrawGilAmount (1%)"))
+        if(ImGui.Button($"設定提領金幣量（1%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetWithdrawGilAmount(1)}");
         }
-        if(ImGui.Button($"SetWithdrawGilAmount (50%)"))
+        if(ImGui.Button($"設定提領金幣量（50%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetWithdrawGilAmount(50)}");
         }
-        if(ImGui.Button($"SetWithdrawGilAmount (99%)"))
+        if(ImGui.Button($"設定提領金幣量（99%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetWithdrawGilAmount(99)}");
         }
-        if(ImGui.Button($"SetWithdrawGilAmount (100%)"))
+        if(ImGui.Button($"設定提領金幣量（100%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetWithdrawGilAmount(100)}");
         }
-        if(ImGui.Button($"WithdrawGilOrCancel"))
+        if(ImGui.Button($"提領金幣或取消"))
         {
             DuoLog.Information($"{RetainerHandlers.ProcessBankOrCancel()}");
         }
-        if(ImGui.Button($"WithdrawGilOrCancel (force cancel)"))
+        if(ImGui.Button($"提領金幣或取消（強制取消）"))
         {
             DuoLog.Information($"{RetainerHandlers.ProcessBankOrCancel(true)}");
         }
@@ -104,19 +104,19 @@ internal unsafe class DebugScheduler : DebugSectionBase
         {
             DuoLog.Information($"{RetainerHandlers.SwapBankMode()}");
         }
-        if(ImGui.Button($"SetDepositGilAmount (1%)"))
+        if(ImGui.Button($"設定存入金幣量（1%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetDepositGilAmount(1)}");
         }
-        if(ImGui.Button($"SetDepositGilAmount (50%)"))
+        if(ImGui.Button($"設定存入金幣量（50%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetDepositGilAmount(50)}");
         }
-        if(ImGui.Button($"SetDepositGilAmount (99%)"))
+        if(ImGui.Button($"設定存入金幣量（99%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetDepositGilAmount(99)}");
         }
-        if(ImGui.Button($"SetDepositGilAmount (100%)"))
+        if(ImGui.Button($"設定存入金幣量（100%）"))
         {
             DuoLog.Information($"{RetainerHandlers.SetDepositGilAmount(100)}");
         }
@@ -136,23 +136,23 @@ internal unsafe class DebugScheduler : DebugSectionBase
             TaskWithdrawGil.Enqueue(50);
         }
 
-        ImGuiEx.Text($"Free inventory slots: {Utils.GetInventoryFreeSlotCount()}");
-        ImGui.InputText("Retainer name", ref dbgRetName, 50);
-        if(ImGui.Button("Select retainer by name"))
+        ImGuiEx.Text($"背包空位：{Utils.GetInventoryFreeSlotCount()}");
+        ImGui.InputText("僱員名稱", ref dbgRetName, 50);
+        if(ImGui.Button("依名稱選擇僱員"))
         {
             DuoLog.Information($"{RetainerListHandlers.SelectRetainerByName(dbgRetName)}");
         }
 
-        if(ImGui.Button("AtkStage get focus"))
+        if(ImGui.Button("AtkStage 取得焦點"))
         {
             var ptr = (nint)AtkStage.Instance()->GetFocus();
             Svc.Chat.Print($"Stage focus: {ptr}");
         }
-        if(ImGui.Button("AtkStage clear focus"))
+        if(ImGui.Button("AtkStage 清除焦點"))
         {
             AtkStage.Instance()->ClearFocus();
         }
-        if(ImGui.Button("Try retrieve current retainer name"))
+        if(ImGui.Button("嘗試取得目前僱員名稱"))
         {
             if(TryGetAddonByName<AddonSelectString>("SelectString", out var select) && IsAddonReady(&select->AtkUnitBase))
             {
@@ -165,7 +165,7 @@ internal unsafe class DebugScheduler : DebugSectionBase
             }
         }
         {
-            if(ImGui.Button("Try close") && TryGetAddonByName<AtkUnitBase>("RetainerList", out var addon))
+            if(ImGui.Button("嘗試關閉") && TryGetAddonByName<AtkUnitBase>("RetainerList", out var addon))
             {
                 var v = stackalloc AtkValue[1]
                 {
@@ -182,7 +182,7 @@ internal unsafe class DebugScheduler : DebugSectionBase
         {
             if(TryGetAddonByName<AtkUnitBase>("Bank", out var addon) && IsAddonReady(addon))
             {
-                if(ImGui.Button("test bank"))
+                if(ImGui.Button("測試寶庫"))
                 {
                     var values = stackalloc AtkValue[2]
                     {

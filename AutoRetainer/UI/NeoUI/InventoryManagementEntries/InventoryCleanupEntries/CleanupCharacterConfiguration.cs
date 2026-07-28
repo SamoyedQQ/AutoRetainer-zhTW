@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public sealed unsafe class CleanupCharacterConfiguration : InventoryManagementBase
 {
-    public override string Name { get; } = "Inventory Cleanup/Character Configuration";
+    public override string Name { get; } = "背包整理/角色設定";
 
     public override int DisplayPriority => -20;
 
     public override void Draw()
     {
-        ImGuiEx.TextWrapped($"Here you can assign preconfigured inventory cleanup lists to your registered characters.");
+        ImGuiEx.TextWrapped($"在這裡可以把預先設定好的背包整理清單指派給已登記的角色。");
         ImGuiEx.SetNextItemFullWidth();
         ImGuiEx.FilteringInputTextWithHint("##search", "Search...", out var filter);
         if(ImGuiEx.BeginDefaultTable(["~Character", "Plan"]))
@@ -30,7 +30,7 @@ public sealed unsafe class CleanupCharacterConfiguration : InventoryManagementBa
                 ImGui.SetNextItemWidth(200f);
                 if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "Default Plan", ImGuiComboFlags.HeightLarge))
                 {
-                    if(ImGui.Selectable("Default Plan", plan == null)) characterData.InventoryCleanupPlan = Guid.Empty;
+                    if(ImGui.Selectable("預設方案", plan == null)) characterData.InventoryCleanupPlan = Guid.Empty;
                     ImGui.Separator();
                     foreach(var cleanupPlan in C.AdditionalIMSettings)
                     {

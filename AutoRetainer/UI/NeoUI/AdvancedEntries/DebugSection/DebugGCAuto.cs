@@ -7,7 +7,7 @@ internal unsafe class DebugGCAuto : DebugSectionBase
 {
     public override void Draw()
     {
-        if(ImGui.CollapsingHeader("Expert items"))
+        if(ImGui.CollapsingHeader("精選道具"))
         {
             foreach(var x in AutoGCHandin.GetHandinItems())
             {
@@ -16,11 +16,11 @@ internal unsafe class DebugGCAuto : DebugSectionBase
         }
         if(ImGui.Button("EnqueueInitiation")) GCContinuation.EnqueueInitiation(true);
         if(ImGui.Button("EnqueueExchangeClose")) GCContinuation.EnqueueDeliveryClose();
-        if(ImGui.Button("Step on")) P.TaskManager.StepMode = true;
+        if(ImGui.Button("踏上踏板")) P.TaskManager.StepMode = true;
         ImGui.SameLine();
-        if(ImGui.Button("Step off")) P.TaskManager.StepMode = false;
+        if(ImGui.Button("離開踏板")) P.TaskManager.StepMode = false;
         ImGui.SameLine();
-        if(ImGui.Button("Step")) P.TaskManager.Step();
+        if(ImGui.Button("步驟")) P.TaskManager.Step();
         if(ImGui.CollapsingHeader("GrandCompanySupplyList"))
         {
             if(TryGetAddonByName<AtkUnitBase>("GrandCompanySupplyList", out var addon) && IsAddonReady(addon))
@@ -57,7 +57,7 @@ internal unsafe class DebugGCAuto : DebugSectionBase
                 ImGuiEx.EzTable(entries);
             }
         }
-        ImGuiEx.Text($"GetGCSealMultiplier: {Utils.GetGCSealMultiplier()}");
+        ImGuiEx.Text($"軍票倍率：{Utils.GetGCSealMultiplier()}");
         if(ImGui.Button(nameof(GCContinuation.SelectExchange))) DuoLog.Information($"{GCContinuation.SelectExchange()}");
         if(ImGui.Button(nameof(GCContinuation.ConfirmExchange))) DuoLog.Information($"{GCContinuation.ConfirmExchange()}");
         if(ImGui.Button(nameof(GCContinuation.SelectGCExchangeVerticalTab))) DuoLog.Information($"{GCContinuation.SelectGCExchangeVerticalTab(0)}");

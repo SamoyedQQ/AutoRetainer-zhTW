@@ -18,13 +18,13 @@ namespace AutoRetainer.UI
 
             ImGuiEx.LineCentered("About0", () =>
             {
-                ImGuiEx.Text($"Published and developed with ");
+                ImGuiEx.Text($"發布與開發合作夥伴： ");
                 ImGui.PushFont(UiBuilder.IconFont);
                 ImGui.SameLine(0, 0);
                 ImGuiEx.Text(ImGuiColors.DalamudRed, FontAwesomeIcon.Heart.ToIconString());
                 ImGui.PopFont();
                 ImGui.SameLine(0, 0);
-                ImGuiEx.Text($" by Puni.sh and NightmareXIV");
+                ImGuiEx.Text($" 由 Puni.sh 與 NightmareXIV 製作");
             });
 
             ImGuiHelpers.ScaledDummy(10f);
@@ -38,7 +38,7 @@ namespace AutoRetainer.UI
             ImGuiHelpers.ScaledDummy(10f);
             ImGuiEx.LineCentered("About3", delegate
             {
-                ImGui.TextWrapped("Join our Discord community for project announcements, updates, and support.");
+                ImGui.TextWrapped("加入我們的 Discord 社群，取得專案公告、更新與支援。");
             });
             ImGuiEx.LineCentered("About4", delegate
             {
@@ -51,13 +51,13 @@ namespace AutoRetainer.UI
                     });
                 }
                 ImGui.SameLine();
-                if(ImGui.Button("Repository"))
+                if(ImGui.Button("程式庫"))
                 {
                     ImGui.SetClipboardText("https://love.puni.sh/ment.json");
                     Notify.Success("Link copied to clipboard");
                 }
                 ImGui.SameLine();
-                if(ImGui.Button("Source Code"))
+                if(ImGui.Button("原始碼"))
                 {
                     Process.Start(new ProcessStartInfo()
                     {
@@ -66,7 +66,7 @@ namespace AutoRetainer.UI
                     });
                 }
                 ImGui.SameLine();
-                if(ImGui.Button("Donate to Puni.sh platform"))
+                if(ImGui.Button("贊助 Puni.sh 平台"))
                 {
                     Process.Start(new ProcessStartInfo()
                     {

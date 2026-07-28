@@ -22,7 +22,7 @@ internal unsafe class DebugVenture : DebugSectionBase
         }
         if(TryGetAddonByName<AddonRetainerTaskAsk>("RetainerTaskAsk", out var addon) && IsAddonReady(&addon->AtkUnitBase))
         {
-            ImGuiEx.Text($"Enabled: {addon->AssignButton->IsEnabled}");
+            ImGuiEx.Text($"已啟用：{addon->AssignButton->IsEnabled}");
         }
 
         foreach(var x in C.OfflineData)
@@ -30,13 +30,13 @@ internal unsafe class DebugVenture : DebugSectionBase
             foreach(var r in x.RetainerData)
             {
                 var adata = Utils.GetAdditionalData(x.CID, r.Name);
-                ImGuiEx.Text($"{x.Name}@{x.World} - {r.Name} last venture index: {adata.VenturePlanIndex}, next venture: {adata.GetNextPlannedVenture()}/{VentureUtils.GetVentureName(adata.GetNextPlannedVenture())}");
+                ImGuiEx.Text($"{x.Name}@{x.World} - {r.Name} 上一個探險索引：{adata.VenturePlanIndex}，下一個探險：{adata.GetNextPlannedVenture()}/{VentureUtils.GetVentureName(adata.GetNextPlannedVenture())}");
             }
         }
-        ImGui.InputInt("Venture id", ref VentureID);
-        ImGui.InputText("Venture name", ref VentureName, 100);
+        ImGui.InputInt("探險 ID", ref VentureID);
+        ImGui.InputText("探險名稱", ref VentureName, 100);
         //if (ImGui.Button("SearchVentureByName")) DuoLog.Information(RetainerHandlers.SearchVentureByName(VentureName).ToString());
-        if(ImGui.Button("Clear Venture list")) DuoLog.Information(RetainerHandlers.ClearTaskSupplylist().ToString());
+        if(ImGui.Button("清空探險清單")) DuoLog.Information(RetainerHandlers.ClearTaskSupplylist().ToString());
         if(ImGui.Button("SelectSpecificVenture Name")) DuoLog.Information(RetainerHandlers.SelectSpecificVentureByName(VentureName).ToString());
         if(ImGui.Button("TaskAssignHuntingVenture"))
         {
@@ -46,11 +46,11 @@ internal unsafe class DebugVenture : DebugSectionBase
         {
             TaskAssignFieldExploration.Enqueue((uint)VentureID);
         }
-        if(ImGui.Button("Select"))
+        if(ImGui.Button("選擇"))
         {
             RetainerHandlers.SelectSpecificVenture((uint)VentureID);
         }
-        if(ImGui.CollapsingHeader("Ventures"))
+        if(ImGui.CollapsingHeader("探險"))
         {
             var data = CSFramework.Instance()->UIModule->GetRaptureAtkModule()->AtkModule.GetStringArrayData(95);
             if(data != null)
@@ -65,7 +65,7 @@ internal unsafe class DebugVenture : DebugSectionBase
                     }
                     else
                     {
-                        ImGuiEx.Text($"{i}: null");
+                        ImGuiEx.Text($"{i}：無");
                     }
                 }
             }

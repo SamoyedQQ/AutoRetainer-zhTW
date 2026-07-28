@@ -15,7 +15,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
     private static int r1, r2, r3, r4, r5 = -1;
     public override void Draw()
     {
-        if(ImGui.CollapsingHeader("Debug"))
+        if(ImGui.CollapsingHeader("除錯"))
         {
             try
             {
@@ -27,16 +27,16 @@ internal unsafe class DebugVoyage : DebugSectionBase
                         ImGuiEx.Text($"{x.Name.Read()}/{x.ReturnTime}/{x.CurrentExplorationPoints.ToArray().Print()}");
                     }
                 }
-                if(ImGui.Button("Erase offline data"))
+                if(ImGui.Button("清除離線資料"))
                 {
                     Data.OfflineAirshipData.Clear();
                     Data.OfflineSubmarineData.Clear();
                 }
-                if(ImGui.Button("Repair 1")) VoyageScheduler.TryRepair(0);
-                if(ImGui.Button("Repair 2")) VoyageScheduler.TryRepair(1);
-                if(ImGui.Button("Repair 3")) VoyageScheduler.TryRepair(2);
-                if(ImGui.Button("Repair 4")) VoyageScheduler.TryRepair(3);
-                if(ImGui.Button("Close repair")) VoyageScheduler.CloseRepair();
+                if(ImGui.Button("修理 1")) VoyageScheduler.TryRepair(0);
+                if(ImGui.Button("修理 2")) VoyageScheduler.TryRepair(1);
+                if(ImGui.Button("修理 3")) VoyageScheduler.TryRepair(2);
+                if(ImGui.Button("修理 4")) VoyageScheduler.TryRepair(3);
+                if(ImGui.Button("關閉修理視窗")) VoyageScheduler.CloseRepair();
                 //if (ImGui.Button("Trigger auto repair")) TaskRepairAll.EnqueueImmediate();
                 ImGui.InputText("data1", ref data1, 50);
                 ImGuiEx.EnumCombo("data2", ref data2);
@@ -44,7 +44,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
                 {
                     ImGuiEx.Text($"{CurrentSubmarine.Get()->CurrentExp}/{CurrentSubmarine.Get()->NextLevelExp}");
                 }
-                ImGuiEx.Text($"Is voyage panel: {VoyageUtils.IsInVoyagePanel()}, {Lang.PanelName}");
+                ImGuiEx.Text($"位於航行面板：{VoyageUtils.IsInVoyagePanel()}，{Lang.PanelName}");
                 if(ImGui.Button("IsVesselNeedsRepair"))
                 {
                     try
@@ -67,17 +67,17 @@ internal unsafe class DebugVoyage : DebugSectionBase
                         e.LogDuo();
                     }
                 }
-                ImGuiEx.Text($"Bell: {Utils.GetReachableRetainerBell(false)}");
-                ImGuiEx.Text($"Bell(true): {Utils.GetReachableRetainerBell(true)}");
-                ImGuiEx.TextWrapped($"Enabled subs: {Data.GetVesselData(VoyageType.Submersible).Select(x => $"{x.Name}, {x.GetRemainingSeconds()}").Print()}");
-                ImGuiEx.Text($"AnyEnabledVesselsAvailable: {Data.AnyEnabledVesselsAvailable()}");
-                ImGuiEx.Text($"Panel type: {VoyageUtils.GetCurrentWorkshopPanelType()}");
+                ImGuiEx.Text($"可用傳喚鈴：{Utils.GetReachableRetainerBell(false)}");
+                ImGuiEx.Text($"可用傳喚鈴（含遠距）：{Utils.GetReachableRetainerBell(true)}");
+                ImGuiEx.TextWrapped($"已啟用的潛水艇：{Data.GetVesselData(VoyageType.Submersible).Select(x => $"{x.Name}, {x.GetRemainingSeconds()}").Print()}");
+                ImGuiEx.Text($"有已啟用的載具可用：{Data.AnyEnabledVesselsAvailable()}");
+                ImGuiEx.Text($"面板類型：{VoyageUtils.GetCurrentWorkshopPanelType()}");
                 if(TryGetAddonByName<AtkUnitBase>("AirShipExplorationResult", out var addon) && IsAddonReady(addon))
                 {
                     var button = addon->UldManager.NodeList[3]->GetAsAtkComponentButton();
-                    ImGuiEx.Text($"Button: {button->IsEnabled}");
+                    ImGuiEx.Text($"按鈕：{button->IsEnabled}");
                 }
-                if(ImGui.Button("Interact with nearest panel"))
+                if(ImGui.Button("與最近的面板互動"))
                 {
                     TaskInteractWithNearestPanel.Enqueue();
                 }
@@ -87,30 +87,30 @@ internal unsafe class DebugVoyage : DebugSectionBase
                 ImGuiEx.TextWrapped(e.ToString());
             }
         }
-        ImGuiEx.Text($"IsRetainerBlockedByVoyage: {VoyageUtils.IsRetainerBlockedByVoyage()}");
+        ImGuiEx.Text($"僱員被航行卡住：{VoyageUtils.IsRetainerBlockedByVoyage()}");
         if(ImGui.CollapsingHeader("data"))
         {
             try
             {
-                ImGuiEx.Text($"Curnet: {(nint)CurrentSubmarine.Get()}");
+                ImGuiEx.Text($"目前指標：{(nint)CurrentSubmarine.Get()}");
                 if(CurrentSubmarine.Get() != null)
                 {
-                    ImGuiEx.Text($"Name: {CurrentSubmarine.Get()->Name.Read()}");
-                    ImGuiEx.Text($"Hull: {CurrentSubmarine.Get()->HullId}");
-                    ImGuiEx.Text($"->SternId: {CurrentSubmarine.Get()->SternId}");
-                    ImGuiEx.Text($"BridgeId: {CurrentSubmarine.Get()->BridgeId}");
-                    ImGuiEx.Text($"BowId: {CurrentSubmarine.Get()->BowId}");
-                    ImGuiEx.Text($"RankId: {CurrentSubmarine.Get()->RankId}");
-                    if(ImGui.Button("Print best exp"))
+                    ImGuiEx.Text($"名稱：{CurrentSubmarine.Get()->Name.Read()}");
+                    ImGuiEx.Text($"艇身：{CurrentSubmarine.Get()->HullId}");
+                    ImGuiEx.Text($"→艇尾 ID：{CurrentSubmarine.Get()->SternId}");
+                    ImGuiEx.Text($"艦橋 ID：{CurrentSubmarine.Get()->BridgeId}");
+                    ImGuiEx.Text($"艇首 ID：{CurrentSubmarine.Get()->BowId}");
+                    ImGuiEx.Text($"階級 ID：{CurrentSubmarine.Get()->RankId}");
+                    if(ImGui.Button("輸出最佳經驗路線"))
                     {
                         CurrentSubmarine.GetBestExps();
                     }
-                    if(ImGui.Button("Select best path"))
+                    if(ImGui.Button("選擇最佳路線"))
                     {
                         TaskCalculateAndPickBestExpRoute.Enqueue();
                     }
-                    ImGuiEx.Text($"Points: {CurrentSubmarine.Get()->CurrentExplorationPoints.ToArray().Print()}");
-                    ImGuiEx.Text($"Points: {CurrentSubmarine.Get()->CurrentExplorationPoints.ToArray().Select(x => VoyageUtils.GetSubmarineExplorationName(x)).Print()}");
+                    ImGuiEx.Text($"探索點：{CurrentSubmarine.Get()->CurrentExplorationPoints.ToArray().Print()}");
+                    ImGuiEx.Text($"探索點：{CurrentSubmarine.Get()->CurrentExplorationPoints.ToArray().Select(x => VoyageUtils.GetSubmarineExplorationName(x)).Print()}");
                 }
             }
             catch(Exception e)
@@ -119,17 +119,17 @@ internal unsafe class DebugVoyage : DebugSectionBase
             }
             var curPlotId = (long*)(Process.GetCurrentProcess().MainModule.BaseAddress + 0x215FB68);
             ImGuiEx.TextCopy($"Plot ID: {*curPlotId:X16}");
-            ImGuiEx.Text($"HID: {HousingManager.Instance()->GetCurrentIndoorHouseId()}");
+            ImGuiEx.Text($"房屋 ID：{HousingManager.Instance()->GetCurrentIndoorHouseId()}");
             if(HousingManager.Instance()->WorkshopTerritory != null)
             {
-                ImGuiEx.Text($"Num air: {HousingManager.Instance()->WorkshopTerritory->Airship.AirshipCount}");
+                ImGuiEx.Text($"飛空艇數量：{HousingManager.Instance()->WorkshopTerritory->Airship.AirshipCount}");
                 //ImGuiEx.Text($"Num w: {HousingManager.Instance()->WorkshopTerritory->Submersible.DataList}");
                 {
                     var data = HousingManager.Instance()->WorkshopTerritory->Airship.Data;
                     for(var i = 0; i < data.Length; i++)
                     {
                         var d = data[i];
-                        ImGuiEx.Text($"Air: {d.Name.Read()}, returns at {d.GetReturnTime()}, current: {d.CurrentExp}");
+                        ImGuiEx.Text($"飛空艇：{d.Name.Read()}，返航時間 {d.GetReturnTime()}，目前經驗 {d.CurrentExp}");
                     }
                 }
                 {
@@ -137,7 +137,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
                     for(var i = 0; i < data.Length; i++)
                     {
                         var d = data[i];
-                        ImGuiEx.Text($"Sub: {d.Name.Read()}, returns at {d.GetReturnTime()}, current: {d.CurrentExp}");
+                        ImGuiEx.Text($"潛水艇：{d.Name.Read()}，返航時間 {d.GetReturnTime()}，目前經驗 {d.CurrentExp}");
                     }
                 }
             }
@@ -145,7 +145,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
         if(ImGui.CollapsingHeader("utils"))
         {
             ImGui.InputInt("r1", ref r1);
-            if(ImGui.Button("Pick"))
+            if(ImGui.Button("選擇"))
             {
                 P.Memory.SelectRoutePointUnsafe(r1);
             }
@@ -166,9 +166,9 @@ internal unsafe class DebugVoyage : DebugSectionBase
             //if (ImGui.Button($"{nameof(TaskDeployOnBestExpVoyage)}")) TaskDeployOnBestExpVoyage.Enqueue();
             if(ImGui.Button($"{nameof(VoyageScheduler.Approach)}")) DuoLog.Information($"{VoyageScheduler.Approach}");
         }
-        if(ImGui.CollapsingHeader("Test task manager"))
+        if(ImGui.CollapsingHeader("測試工作管理器"))
         {
-            if(ImGui.Button("Test redeploy airship"))
+            if(ImGui.Button("測試重新派出飛空艇"))
             {
                 P.TaskManager.Enqueue(VoyageScheduler.Lockon);
                 P.TaskManager.Enqueue(VoyageScheduler.Approach);

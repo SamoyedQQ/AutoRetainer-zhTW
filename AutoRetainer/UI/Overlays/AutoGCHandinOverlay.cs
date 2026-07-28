@@ -19,7 +19,7 @@ internal unsafe class AutoGCHandinOverlay : Window
     {
         if(Allowed)
         {
-            ImGui.Checkbox("Enable Automatic Expert Delivery", ref AutoGCHandin.Operation);
+            ImGui.Checkbox("啟用自動精選交易", ref AutoGCHandin.Operation);
         }
         if(C.OfflineData.TryGetFirst(x => x.CID == Svc.ClientState.LocalContentId, out var d) && !AutoGCHandin.Operation)
         {
@@ -45,12 +45,12 @@ internal unsafe class AutoGCHandinOverlay : Window
         if(!Svc.ClientState.LocalPlayer.StatusList.Any(x => x.StatusId == 1078) && InventoryManager.Instance()->GetInventoryItemCount(14946) > 0)
         {
             ImGui.SameLine();
-            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudRed, ImGuiColors.DalamudYellow), $"You can use Priority Seal Allowance");
+            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudRed, ImGuiColors.DalamudYellow), $"你可以使用軍票加成特權");
         }
         if(!Player.IsInHomeWorld)
         {
             ImGui.SameLine();
-            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudRed, ImGuiColors.DalamudYellow), $"Foreign world. No FC points will be granted.");
+            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudRed, ImGuiColors.DalamudYellow), $"非所屬伺服器，不會取得公會點數。");
         }
         height = ImGui.GetWindowSize().Y;
     }

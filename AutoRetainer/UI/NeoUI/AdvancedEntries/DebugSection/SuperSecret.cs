@@ -6,18 +6,18 @@ internal class SuperSecret : DebugSectionBase
 {
     public override void Draw()
     {
-        ImGuiEx.TextWrapped(ImGuiColors.ParsedOrange, "Anything can happen here.");
-        ImGui.Checkbox("Old RetainerSense", ref C.OldRetainerSense);
-        ImGuiComponents.HelpMarker("Detect and use the closest Summoning Bell within valid distance of the player.");
-        ImGuiEx.TextWrapped(ImGuiColors.DalamudGrey, "RetainerSense is enforced to be active during MultiMode operation.");
+        ImGuiEx.TextWrapped(ImGuiColors.ParsedOrange, "這裡什麼事都可能發生。");
+        ImGui.Checkbox("舊版 RetainerSense", ref C.OldRetainerSense);
+        ImGuiComponents.HelpMarker("偵測並使用玩家有效距離內最近的傳喚鈴。");
+        ImGuiEx.TextWrapped(ImGuiColors.DalamudGrey, "多角模式運作期間會強制啟用 RetainerSense。");
         ImGui.Separator();
-        ImGui.Checkbox($"Unsafe options protection", ref C.UnsafeProtection);
+        ImGui.Checkbox($"危險選項保護", ref C.UnsafeProtection);
         ImGui.SameLine();
-        if(ImGui.Button($"Write to registry"))
+        if(ImGui.Button($"寫入登錄檔"))
         {
             Safety.Set(C.UnsafeProtection);
         }
         var g = Safety.Get();
-        ImGuiEx.Text(g ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"Safety flag: {(g ? "Present" : "Absent")}");
+        ImGuiEx.Text(g ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"安全旗標：{(g ? "Present" : "Absent")}");
     }
 }

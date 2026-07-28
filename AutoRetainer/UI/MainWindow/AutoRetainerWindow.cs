@@ -21,7 +21,7 @@ internal unsafe class AutoRetainerWindow : Window
             Click = OnLockButtonClick,
             Icon = C.PinWindow ? FontAwesomeIcon.Lock : FontAwesomeIcon.LockOpen,
             IconOffset = new(3, 2),
-            ShowTooltip = () => ImGui.SetTooltip("Lock window position and size"),
+            ShowTooltip = () => ImGui.SetTooltip("鎖定視窗位置與大小"),
         };
         SizeConstraints = new()
         {
@@ -35,7 +35,7 @@ internal unsafe class AutoRetainerWindow : Window
             Click = (m) => { if(m == ImGuiMouseButton.Left) S.NeoWindow.IsOpen = true; },
             Icon = FontAwesomeIcon.Cog,
             IconOffset = new(2, 2),
-            ShowTooltip = () => ImGui.SetTooltip("Open settings window"),
+            ShowTooltip = () => ImGui.SetTooltip("開啟設定視窗"),
         });
         TitleBarButtons.Add(LockButton);
     }
@@ -96,19 +96,19 @@ internal unsafe class AutoRetainerWindow : Window
         if(!C.AcceptedDisclamer)
         {
             new NuiBuilder()
-                .Section("Disclaimer")
-                .TextWrapped(ImGuiColors.DalamudYellow, "Please note that using AutoRetainer for RMT purposes is strictly prohibited. ")
-                .TextWrapped(ImGuiColors.DalamudRed, "To avoid unnecessary consequences please follow these rules when using AutoRetainer:")
-                .TextWrapped("1. Do not acknowledge your use of AutoRetainer in game chat;")
-                .TextWrapped("2. Do not leave AutoRetainer unattended for prolonged period of time;")
-                .TextWrapped("3. Ensure that your total playing+AutoRetainer usage time does not exceeds 16 hours per day; ensure that periods of inactivity exist between your retainer/submersible checking routine;")
-                .TextWrapped("4. Never reply back to players that are trying to do so-called bot checks by trading or chatting with you; instead, blacklist these players immediately;")
-                .TextWrapped("5. If questioned by game master, always claim that you are doing all actions manually and never admit plugin usage.")
-                .TextWrapped("Failure to follow these guidelines may put your account at risk.")
-                .TextWrapped(GradientColor.Get(ImGuiColors.DalamudYellow, ImGuiColors.DalamudRed), "You may not use AutoRetainer for Real Money Trading or other commercial purposes. No support will be provided if you are using it for these purposes.")
+                .Section("免責聲明")
+                .TextWrapped(ImGuiColors.DalamudYellow, "請注意，嚴禁將 AutoRetainer 用於 RMT（現金交易）用途。 ")
+                .TextWrapped(ImGuiColors.DalamudRed, "為了避免不必要的後果，使用 AutoRetainer 時請遵守以下原則：")
+                .TextWrapped("1. 不要在遊戲聊天中承認自己有在用 AutoRetainer；")
+                .TextWrapped("2. 不要讓 AutoRetainer 長時間無人看管地掛著；")
+                .TextWrapped("3. 確保「遊玩＋AutoRetainer」的每日總時數不超過 16 小時，並且在每輪僱員／潛水艇檢查之間留有閒置時間；")
+                .TextWrapped("4. 遇到用交易或聊天做所謂「機器人測試」的玩家，一律不要回應，直接把對方加入黑名單；")
+                .TextWrapped("5. 若被 GM 詢問，一律聲稱所有操作都是手動進行，絕不承認使用外掛。")
+                .TextWrapped("沒有遵守這些原則可能會讓你的帳號陷入風險。")
+                .TextWrapped(GradientColor.Get(ImGuiColors.DalamudYellow, ImGuiColors.DalamudRed), "不得將 AutoRetainer 用於現金交易（RMT）或其他商業用途。若用於這些用途，一律不提供支援。")
                 .Widget(() =>
                 {
-                    if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Check, "Accept and continue"))
+                    if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Check, "同意並繼續"))
                     {
                         C.AcceptedDisclamer = true;
                         EzConfig.Save();
@@ -124,7 +124,7 @@ internal unsafe class AutoRetainerWindow : Window
         {
             ImGui.BeginDisabled();
         }
-        if(ImGui.Checkbox($"Enable {P.Name}", ref e))
+        if(ImGui.Checkbox($"啟用 {P.Name}", ref e))
         {
             P.WasEnabled = false;
             if(e)
@@ -139,29 +139,29 @@ internal unsafe class AutoRetainerWindow : Window
         if(C.ShowDeployables && (VoyageUtils.Workshops.Contains(Svc.ClientState.TerritoryType) || VoyageScheduler.Enabled))
         {
             ImGui.SameLine();
-            ImGui.Checkbox($"Deployables", ref VoyageScheduler.Enabled);
+            ImGui.Checkbox($"載具", ref VoyageScheduler.Enabled);
         }
         if(disabled)
         {
             ImGui.EndDisabled();
-            ImGuiComponents.HelpMarker($"MultiMode controls this option. Hold CTRL to override.");
+            ImGuiComponents.HelpMarker($"此選項由多角模式控制。按住 CTRL 可強制變更。");
         }
 
         if(P.WasEnabled)
         {
             ImGui.SameLine();
-            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"Paused");
+            ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"已暫停");
         }
 
         ImGui.SameLine();
-        if(ImGui.Checkbox("Multi", ref MultiMode.Enabled))
+        if(ImGui.Checkbox("多角", ref MultiMode.Enabled))
         {
             MultiMode.OnMultiModeEnabled();
         }
         if(C.ShowNightMode)
         {
             ImGui.SameLine();
-            if(ImGui.Checkbox("Night", ref C.NightMode))
+            if(ImGui.Checkbox("夜間", ref C.NightMode))
             {
                 MultiMode.BailoutNightMode();
             }
@@ -175,7 +175,7 @@ internal unsafe class AutoRetainerWindow : Window
         if(C.CharEqualize && MultiMode.Enabled)
         {
             ImGui.SameLine();
-            if(ImGui.Button("Reset counters"))
+            if(ImGui.Button("重設計數"))
             {
                 MultiMode.CharaCnt.Clear();
             }
@@ -185,9 +185,9 @@ internal unsafe class AutoRetainerWindow : Window
 
         if(IPC.Suppressed)
         {
-            ImGuiEx.Text(ImGuiColors.DalamudRed, $"Plugin operation is suppressed by other plugin.");
+            ImGuiEx.Text(ImGuiColors.DalamudRed, $"外掛運作已被其他外掛暫停。");
             ImGui.SameLine();
-            if(ImGui.SmallButton("Cancel"))
+            if(ImGui.SmallButton("取消"))
             {
                 IPC.Suppressed = false;
             }
@@ -196,7 +196,7 @@ internal unsafe class AutoRetainerWindow : Window
         if(P.TaskManager.IsBusy)
         {
             ImGui.SameLine();
-            if(ImGui.Button($"Abort {P.TaskManager.NumQueuedTasks} tasks"))
+            if(ImGui.Button($"中止 {P.TaskManager.NumQueuedTasks} 項工作"))
             {
                 P.TaskManager.Abort();
             }

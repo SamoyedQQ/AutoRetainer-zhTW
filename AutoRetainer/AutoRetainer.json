@@ -1,9 +1,9 @@
-﻿{
-    "Author": "кайт машина (Puni.sh)",
-    "Name": "AutoRetainer",
+{
+    "Author": "кайт машина (Puni.sh)｜繁中：ffxiv-tw-api13",
+    "Name": "AutoRetainer（繁中）",
     "InternalName": "AutoRetainer",
-    "Punchline": "Collect and assign ventures to your retainers from the comfort of your bed.",
-    "Description": "Collect and assign ventures to your retainers from the comfort of your bed.",
+    "Punchline": "躺著也能收探險、派僱員。",
+    "Description": "躺著也能收探險、派僱員。台服 API13 繁體中文版，介面用詞比照遊戲本體。",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/PunishXIV/AutoRetainer",
     "DalamudApiLevel": 13,

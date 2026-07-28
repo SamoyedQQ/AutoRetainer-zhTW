@@ -56,7 +56,7 @@ internal static unsafe class MultiModeUI
                 data.Enabled = !data.Enabled;
             }
             if(colen) ImGui.PopStyleColor();
-            ImGuiEx.Tooltip($"Enable multi-mode for this character");
+            ImGuiEx.Tooltip($"為此角色啟用多角模式");
             ImGui.SameLine(0, 3);
             if(ImGuiEx.IconButton(FontAwesomeIcon.DoorOpen))
             {
@@ -73,13 +73,13 @@ internal static unsafe class MultiModeUI
             {
                 Copy($"/ays relog {data.Name}@{data.World}");
             }
-            ImGuiEx.Tooltip($"Left click - relog to this character\nRight click - copy relog command into clipboard");
+            ImGuiEx.Tooltip($"左鍵－切換登入此角色\n右鍵－複製切換登入指令到剪貼簿");
             ImGui.SameLine(0, 3);
             if(ImGuiEx.IconButton(FontAwesomeIcon.UserCog))
             {
                 ImGui.OpenPopup($"popup{data.CID}");
             }
-            ImGuiEx.Tooltip($"Configure Character");
+            ImGuiEx.Tooltip($"設定角色");
             ImGui.SameLine(0, 3);
 
             if(ImGui.BeginPopup($"popup{data.CID}"))
@@ -162,26 +162,26 @@ internal static unsafe class MultiModeUI
         StatusTextWidth = 0f;
         UIUtils.DrawOverlayTexts(overlayTexts, ref StatusTextWidth);
 
-        if(C.Verbose && ImGui.CollapsingHeader("Debug"))
+        if(C.Verbose && ImGui.CollapsingHeader("除錯"))
         {
-            ImGuiEx.Text($"GetCurrentTargetCharacter: {MultiMode.GetCurrentTargetCharacter()}");
+            ImGuiEx.Text($"目前目標角色：{MultiMode.GetCurrentTargetCharacter()}");
             //ImGuiEx.Text($"Yes Already: {YesAlready.IsEnabled()}");
-            ImGuiEx.Text($"IsCurrentCharacterDone: {MultiMode.IsCurrentCharacterDone()}");
-            ImGuiEx.Text($"NextInteraction: {Math.Max(0, MultiMode.NextInteractionAt - Environment.TickCount64)}");
-            ImGuiEx.Text($"EnsureCharacterValidity: {MultiMode.EnsureCharacterValidity(true)}");
-            ImGuiEx.Text($"IsInteractionAllowed: {MultiMode.IsInteractionAllowed()}");
-            ImGuiEx.Text($"GetPreferredCharacter: {MultiMode.GetPreferredCharacter()}");
-            ImGuiEx.Text($"IsAllRetainersHaveMoreThan15Mins: {MultiMode.IsAllRetainersHaveMoreThan15Mins()}");
-            ImGuiEx.Text($"Target ?? Preferred: {MultiMode.GetCurrentTargetCharacter() ?? MultiMode.GetPreferredCharacter()}");
+            ImGuiEx.Text($"目前角色已處理完畢：{MultiMode.IsCurrentCharacterDone()}");
+            ImGuiEx.Text($"下次互動倒數：{Math.Max(0, MultiMode.NextInteractionAt - Environment.TickCount64)}");
+            ImGuiEx.Text($"角色有效性檢查：{MultiMode.EnsureCharacterValidity(true)}");
+            ImGuiEx.Text($"允許互動：{MultiMode.IsInteractionAllowed()}");
+            ImGuiEx.Text($"優先角色：{MultiMode.GetPreferredCharacter()}");
+            ImGuiEx.Text($"所有僱員都還有 15 分鐘以上：{MultiMode.IsAllRetainersHaveMoreThan15Mins()}");
+            ImGuiEx.Text($"目標／優先角色：{MultiMode.GetCurrentTargetCharacter() ?? MultiMode.GetPreferredCharacter()}");
             //ImGuiEx.Text($"GetAutoAfkOpt: {MultiMode.GetAutoAfkOpt()}");
             //ImGuiEx.Text($"AutoAfkValue: {ConfigModule.Instance()->GetIntValue(145)}");
-            ImGuiEx.Text($"LastLongin: {MultiMode.LastLogin:X16}");
-            ImGuiEx.Text($"AnyRetainersAvailable: {MultiMode.AnyRetainersAvailable()}");
-            ImGuiEx.Text($"IsAnySelectedRetainerFinishesWithin, 60: {MultiMode.IsAnySelectedRetainerFinishesWithin(60)}");
-            ImGuiEx.Text($"IsAnySelectedRetainerFinishesWithin, 5*60: {MultiMode.IsAnySelectedRetainerFinishesWithin(5 * 60)}");
+            ImGuiEx.Text($"上次登入：{MultiMode.LastLogin:X16}");
+            ImGuiEx.Text($"有僱員可用：{MultiMode.AnyRetainersAvailable()}");
+            ImGuiEx.Text($"有僱員將在 1 分鐘內完成：{MultiMode.IsAnySelectedRetainerFinishesWithin(60)}");
+            ImGuiEx.Text($"有僱員將在 5 分鐘內完成：{MultiMode.IsAnySelectedRetainerFinishesWithin(5 * 60)}");
             foreach(var data in C.OfflineData)
             {
-                ImGuiEx.Text($"Chatacter {data}\n  GetNeededVentureAmount: {data.GetNeededVentureAmount()}");
+                ImGuiEx.Text($"角色 {data}\n  所需探險幣數量：{data.GetNeededVentureAmount()}");
             }
         }
     }
